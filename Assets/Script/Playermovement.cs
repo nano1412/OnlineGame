@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 
 public class Playermovement : MonoBehaviour
@@ -10,6 +11,18 @@ public class Playermovement : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private bool isGrounded;
+    private NetworkVariable<int> postX = new NetworkVariable<int>(0,
+        NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+    public override void OnNetworkSpawn()
+    {
+
+
+        postX.OnValueChanged += (int previousValue, int newvalue) =>
+        {
+            Debug.Log("OwnerID = " + OwnerClientId + " : post x = " + postX.Value);
+        };
+    }
 
     void Start()
     {
