@@ -4,7 +4,7 @@ public class Playermovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
-    public Transform groundCheck;
+    public bool isLeft = false;
     //public LayerMask groundLayer;
 
     private Rigidbody2D rb;
@@ -27,9 +27,15 @@ public class Playermovement : MonoBehaviour
     {
         float moveInput = 0f;
         if (Input.GetKey(KeyCode.A))
+        {
             moveInput = -1f;
+            isLeft = true;
+        }
         else if (Input.GetKey(KeyCode.D))
+        {
             moveInput = 1f;
+            isLeft = false;
+        }
 
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
 
@@ -43,7 +49,7 @@ public class Playermovement : MonoBehaviour
     {
         //isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
 
-        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             isGrounded = false;
