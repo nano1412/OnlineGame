@@ -13,6 +13,7 @@ public class LoginManagerScript : MonoBehaviour
         NetworkManager.Singleton.OnServerStarted += HandleServerStarted;
         NetworkManager.Singleton.OnClientConnectedCallback += HandleClientConnected;
         NetworkManager.Singleton.OnClientDisconnectCallback += HandleClientDisconnect;
+        NetworkManager.Singleton.ConnectionApprovalCallback = ApprovalCheck; // ใช้กำหนดจุดเกิด
     }
 
     private void HandleClientDisconnect(ulong clientId)
@@ -53,6 +54,7 @@ public class LoginManagerScript : MonoBehaviour
         NetworkManager.Singleton.OnServerStarted -= HandleServerStarted;
         NetworkManager.Singleton.OnClientConnectedCallback -= HandleClientConnected;
         NetworkManager.Singleton.OnClientDisconnectCallback -= HandleClientDisconnect;
+        NetworkManager.Singleton.ConnectionApprovalCallback -= ApprovalCheck;
     }
 
     public void Host()
@@ -63,5 +65,29 @@ public class LoginManagerScript : MonoBehaviour
     public void Client()
     {
         NetworkManager.Singleton.StartClient();
+    }
+
+    private void ApprovalCheck(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
+    {
+        ulong clientId = request.ClientNetworkId;
+
+        Vector3 spawnPos;
+        Quaternion spawnRot = Quaternion.identity;
+
+        if (NetworkManager.Singleton.ConnectedClients.Count == 1)
+        {
+            // ฝ่ายผู้กล้า (ซ้าย)
+            spawnPos = new Vector3(-4, 1, 0);
+        }
+        else
+        {
+            // ฝ่ายปีศาจ (ขวา)
+            spawnPos = new Vector3(4, 1, 0);
+        }
+
+        response.Position = spawnPos;
+        response.Rotation = spawnRot;
+        response.Approved = true;
+        response.CreatePlayerObject = true;
     }
 }
