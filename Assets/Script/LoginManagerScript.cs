@@ -68,13 +68,13 @@ public class LoginManagerScript : MonoBehaviour
 
     private void SetSpawnLocation(ulong clientId, NetworkManager.ConnectionApprovalResponse response)
     {
-        Vector3 spawnPos = Vector3.zero;
+        Vector2 spawnPos = Vector2.zero;
         Quaternion spawnRot = Quaternion.identity;
 
         // server
         if (clientId == NetworkManager.Singleton.LocalClientId)
         {
-            spawnPos = new Vector3(2, 1, 0);
+            spawnPos = new Vector2(-4, 1);
             spawnRot = Quaternion.Euler(0, 0f, 0);
         }
         else
@@ -82,16 +82,12 @@ public class LoginManagerScript : MonoBehaviour
             switch (NetworkManager.Singleton.ConnectedClients.Count)
             {
                 case 1:
-                    spawnPos = new Vector3(-2, 1, 0);
+                    spawnPos = new Vector2(4, 1);
                     spawnRot = Quaternion.Euler(0, 0f, 0);
-                    break;
-                case 2:
-                    spawnPos = new Vector3(-4, 1, 0);
-                    spawnRot = Quaternion.Euler(0, 180f, 0);
                     break;
             }
         }
-        response.Position = spawnPos;
+        response.Position = new Vector3(spawnPos.x, spawnPos.y, 0);
         response.Rotation = spawnRot;
     }
 
@@ -108,7 +104,6 @@ public class LoginManagerScript : MonoBehaviour
 
         if (byteLength > 0)
         {
-         
             isApproved = true; // Assume true for simplicity, you can add more logic if needed
         }
       
