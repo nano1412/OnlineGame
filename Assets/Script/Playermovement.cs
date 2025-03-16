@@ -5,7 +5,7 @@ public class Playermovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
     public Transform groundCheck;
-    public LayerMask groundLayer;
+    //public LayerMask groundLayer;
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
@@ -31,7 +31,7 @@ public class Playermovement : MonoBehaviour
         else if (Input.GetKey(KeyCode.D))
             moveInput = 1f;
 
-        rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
 
         if (moveInput > 0)
             spriteRenderer.flipX = false;
@@ -41,11 +41,20 @@ public class Playermovement : MonoBehaviour
 
     void Jump()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+        //isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
 
         if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && isGrounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            isGrounded = false;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.transform.tag == "Ground")
+        {
+            isGrounded = true;
         }
     }
 }
