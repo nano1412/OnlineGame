@@ -14,15 +14,7 @@ public class Playermovement : MonoBehaviour
     private NetworkVariable<int> postX = new NetworkVariable<int>(0,
         NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-    public override void OnNetworkSpawn()
-    {
-
-
-        postX.OnValueChanged += (int previousValue, int newvalue) =>
-        {
-            Debug.Log("OwnerID = " + OwnerClientId + " : post x = " + postX.Value);
-        };
-    }
+   
 
     void Start()
     {
