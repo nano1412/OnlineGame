@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using Unity.Netcode;
-using TMPro;
 
 public class LoginManagerScript : MonoBehaviour
 {
@@ -54,11 +53,11 @@ public class LoginManagerScript : MonoBehaviour
         NetworkManager.Singleton.OnServerStarted -= HandleServerStarted;
         NetworkManager.Singleton.OnClientConnectedCallback -= HandleClientConnected;
         NetworkManager.Singleton.OnClientDisconnectCallback -= HandleClientDisconnect;
-        NetworkManager.Singleton.ConnectionApprovalCallback -= ApprovalCheck;
     }
 
     public void Host()
     {
+        NetworkManager.Singleton.ConnectionApprovalCallback = ApprovalCheck;
         NetworkManager.Singleton.StartHost();
     }
 
@@ -67,27 +66,61 @@ public class LoginManagerScript : MonoBehaviour
         NetworkManager.Singleton.StartClient();
     }
 
-    private void ApprovalCheck(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
+    private void SetSpawnLocation(ulong clientId, NetworkManager.ConnectionApprovalResponse response)
     {
-        ulong clientId = request.ClientNetworkId;
-
-        Vector3 spawnPos;
+        Vector3 spawnPos = Vector3.zero;
         Quaternion spawnRot = Quaternion.identity;
 
-        if (NetworkManager.Singleton.ConnectedClients.Count == 1)
+        // server
+        if (clientId == NetworkManager.Singleton.LocalClientId)
         {
-            // ฝ่ายผู้กล้า (ซ้าย)
-            spawnPos = new Vector3(-4, 1, 0);
+            spawnPos = new Vector3(2, 1, 0);
+            spawnRot = Quaternion.Euler(0, 0f, 0);
         }
         else
         {
-            // ฝ่ายปีศาจ (ขวา)
-            spawnPos = new Vector3(4, 1, 0);
+            switch (NetworkManager.Singleton.ConnectedClients.Count)
+            {
+                case 1:
+                    spawnPos = new Vector3(-2, 1, 0);
+                    spawnRot = Quaternion.Euler(0, 0f, 0);
+                    break;
+                case 2:
+                    spawnPos = new Vector3(-4, 1, 0);
+                    spawnRot = Quaternion.Euler(0, 180f, 0);
+                    break;
+            }
         }
-
         response.Position = spawnPos;
         response.Rotation = spawnRot;
-        response.Approved = true;
+    }
+
+    private void ApprovalCheck(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
+    {
+        // The client identifier to be authenticated
+        var clientId = request.ClientNetworkId;
+
+        // Additional connection data defined by user code
+        var connectionData = request.Payload;
+        bool isApproved = false;
+        int byteLength = connectionData.Length;
+
+
+        if (byteLength > 0)
+        {
+         
+            isApproved = true; // Assume true for simplicity, you can add more logic if needed
+        }
+      
+
+        response.Approved = isApproved;
         response.CreatePlayerObject = true;
+        response.Position = Vector3.zero + new Vector3(0, 2, 0);
+        response.Rotation = Quaternion.identity;
+
+        SetSpawnLocation(clientId, response);
+        NetworkLog.LogInfoServer("spawn pos of " + clientId + ": " + response.Position.ToString());
+        response.Reason = "Some reason for not approving the client";
+        response.Pending = false;
     }
 }
