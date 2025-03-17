@@ -6,7 +6,7 @@ public class Playermovement : NetworkBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
-    public bool isLeft = false;
+    public NetworkVariable<bool> isFlipped = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     //public LayerMask groundLayer;
 
     private Rigidbody2D rb;
@@ -17,28 +17,33 @@ public class Playermovement : NetworkBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        isFlipped.OnValueChanged += HandleFlipChange;
 
-        if (IsOwner)
-        {
-            // ¡ÓË¹´µÓáË¹è§àÃÔèÁµé¹
+        if (!IsOwner) return;
+            // ï¿½ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (NetworkManager.Singleton.IsHost)
             {
-                transform.position = new Vector3(-5f, 1f, 0f);  // Host àÃÔèÁ·Õè«éÒÂ
+                transform.position = new Vector3(-5f, 1f, 0f);  // Host ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             }
             else if (NetworkManager.Singleton.IsClient)
             {
-                transform.position = new Vector3(5f, 1f, 0f);  // Client àÃÔèÁ·Õè¢ÇÒ
+                transform.position = new Vector3(5f, 1f, 0f);  // Client ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             }
-        }
+    }
+
+    private void HandleFlipChange(bool previous, bool current)
+    {
+        // Apply the flip based on the network value
+        spriteRenderer.flipX = current;
     }
 
     void Update()
     {
-        if (IsOwner)
-        {
-            Move();
-            Jump();
-        }
+        if (!IsOwner) return;
+
+        Move();
+        Jump();
+        
             
     }
 
@@ -48,21 +53,16 @@ public class Playermovement : NetworkBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             moveInput = -1f;
-            isLeft = true;
+            isFlipped.Value = true;
         }
         else if (Input.GetKey(KeyCode.D))
         {
             moveInput = 1f;
-            isLeft = false;
+            isFlipped.Value = false;
         }
 
         //rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
-
-        if (moveInput > 0)
-            spriteRenderer.flipX = false;
-        else if (moveInput < 0)
-            spriteRenderer.flipX = true;
     }
 
     void Jump()
@@ -83,5 +83,12 @@ public class Playermovement : NetworkBehaviour
         {
             isGrounded = true;
         }
+    }
+
+    [ServerRpc]
+    private void ToggleFlipServerRpc(bool newFlipState)
+    {
+        // Update the NetworkVariable on the server
+        isFlipped.Value = newFlipState;
     }
 }
