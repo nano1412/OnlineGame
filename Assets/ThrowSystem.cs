@@ -15,9 +15,9 @@ public class ThrowSystem : NetworkBehaviour
 
     [SerializeField] GameObject bomb;
     [SerializeField] GameObject arrow;
-    [SerializeField] float chargeSpeed = 3;
+    [SerializeField] float chargeSpeed = 1;
     [SerializeField] float power;
-    [SerializeField] float powerMultiplier;
+    [SerializeField] float powerMultiplier = 0.1f;
     [SerializeField] private float maxPower = 10;
     [SerializeField] float cooldown = 2;
     [SerializeField] float cooldowncount;
@@ -85,19 +85,20 @@ public class ThrowSystem : NetworkBehaviour
         if (Input.GetMouseButtonUp(0) && cooldowncount < 0)
         {
             cooldowncount = cooldown;
-            ThrowBomb();
+            ThrowBombServerRpc();
         }
     }
 
-    void ThrowBomb()
+    [ServerRpc(RequireOwnership = false)]
+    void ThrowBombServerRpc()
     {
         print(mouse_pos.x);
         print(mouse_pos.y);
         GameObject newBomb = Instantiate(bomb, hand.transform.Find("bombRelease").position, Quaternion.identity,transform);
+        newBomb.GetComponent<NetworkObject>().Spawn(true);
         // add force depend on angle of hand and power
 
         newBomb.GetComponent<Rigidbody2D>().AddForce(new Vector2(mouse_pos.x, mouse_pos.y) * power * powerMultiplier,ForceMode2D.Impulse);
-
         power = 1;
     }
 }

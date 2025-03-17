@@ -86,14 +86,14 @@ public class Playermovement : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void ToggleFlipServerRpc(bool newFlipState)
     {
         // Update the NetworkVariable on the server
         isFlipped.Value = newFlipState;
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void TakeDamageServerRpc(float damage)
     {
         health -= damage;
