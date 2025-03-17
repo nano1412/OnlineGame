@@ -9,6 +9,7 @@ public class Boom : NetworkBehaviour
     public float explosionRadius = 5f;
     public float countdown = 3f; // ระเบิดหลังจาก 3 วินาที
     private bool hasExploded = false;
+    [SerializeField] float armTime = 2;
 
     public AudioClip hitSound;
     private AudioSource audioSource;
@@ -28,6 +29,7 @@ public class Boom : NetworkBehaviour
 
     void Update()
     {
+        armTime -= Time.deltaTime;
         if (target == null)
         {
             return;
@@ -45,7 +47,7 @@ public class Boom : NetworkBehaviour
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     void ExplodeServerRpc()
     {
         if (hasExploded) return;
@@ -70,26 +72,17 @@ public class Boom : NetworkBehaviour
         Destroy(gameObject);
     }
 
-    [ClientRpc]
+    [ClientRpc(RequireOwnership = false)]
     void ExplodeClientRpc()
     {
         // เพิ่มเอฟเฟกต์ระเบิดที่ทุกไคลเอนต์เห็นพร้อมกัน
         Debug.Log("Boom exploded!");
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Playermovement player = collision.GetComponent<Playermovement>();
-        if (player != null)
-        {
-            ExplodeServerRpc();
-        }
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Playermovement player = collision.gameObject.GetComponent<Playermovement>();
-        if (player != null)
+        if (player != null && armTime < 0)
         {
             ExplodeServerRpc();
         }
