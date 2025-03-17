@@ -158,7 +158,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.01352489, y: 0.10937971}
+  m_Offset: {x: 0.035242707, y: -0.057003856}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -168,7 +168,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.5996783, y: 2.2285085}
+  m_Size: {x: 1.341497, y: 1.8957412}
   m_EdgeRadius: 0
 --- !u!114 &-6791141638073677929
 MonoBehaviour:
@@ -228,9 +228,12 @@ MonoBehaviour:
   hand: {fileID: 9180340485198870919}
   bomb: {fileID: 5317098292680755031, guid: 5661f2f1ed0da064d915ca6e123fb6dd, type: 3}
   arrow: {fileID: 0}
-  chargeSpeed: 3
+  chargeSpeed: 5
   power: 0
+  powerMultiplier: 0.05
   maxPower: 10
+  cooldown: 2
+  cooldowncount: 0
 --- !u!114 &-8775951296895834039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,6 +316,37 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
+--- !u!1 &2710868022225360489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4248136445962815190}
+  m_Layer: 0
+  m_Name: bombRelease
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4248136445962815190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2710868022225360489}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1268, y: -0.0614, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3471965774917134495}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2844266071042776306
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +408,8 @@ Transform:
   m_LocalPosition: {x: -0.217, y: -0.2, z: 0}
   m_LocalScale: {x: 7.360196, y: 7.360196, z: 7.360196}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4248136445962815190}
   m_Father: {fileID: 8223187190609588102}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &307153089173567037

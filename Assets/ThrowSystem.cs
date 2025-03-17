@@ -17,7 +17,10 @@ public class ThrowSystem : NetworkBehaviour
     [SerializeField] GameObject arrow;
     [SerializeField] float chargeSpeed = 3;
     [SerializeField] float power;
+    [SerializeField] float powerMultiplier;
     [SerializeField] private float maxPower = 10;
+    [SerializeField] float cooldown = 2;
+    [SerializeField] float cooldowncount;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -72,23 +75,29 @@ public class ThrowSystem : NetworkBehaviour
 
     void ChargeUp()
     {
-        if (Input.GetMouseButton(0))
+        cooldowncount -= Time.deltaTime;
+
+        if (Input.GetMouseButton(0) && cooldowncount < 0 && power < maxPower)
         {
-            print("mouse held");
             power += Time.deltaTime * chargeSpeed;
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && cooldowncount < 0)
         {
-            print("mouse release");
+            cooldowncount = cooldown;
             ThrowBomb();
         }
     }
 
     void ThrowBomb()
     {
-        GameObject newBome = Instantiate(bomb, new Vector3(), Quaternion.identity) as GameObject;
+        print(mouse_pos.x);
+        print(mouse_pos.y);
+        GameObject newBomb = Instantiate(bomb, hand.transform.Find("bombRelease").position, Quaternion.identity,transform);
         // add force depend on angle of hand and power
-        power = 0;
+
+        newBomb.GetComponent<Rigidbody2D>().AddForce(new Vector2(mouse_pos.x, mouse_pos.y) * power * powerMultiplier,ForceMode2D.Impulse);
+
+        power = 1;
     }
 }
