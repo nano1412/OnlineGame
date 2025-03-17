@@ -222,7 +222,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BomSprite_0: -2625459967315071155
+      BomSprite_1: 7265274740158109114
+      BomSprite_2: 1217548625536564182
+      BomSprite_3: -5318153281135659715
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
