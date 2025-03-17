@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 63cf15eef2b2b4c49af590ac19fa1827
+guid: f272bc1b686d0764c9e356ff3b17118d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3141561889144220030
-    second: spritesheetIDLESkeleton_0
-  - first:
-      213: -7573605709614752036
-    second: spritesheetIDLESkeleton_1
-  - first:
-      213: -5228215983127824675
-    second: spritesheetIDLESkeleton_2
-  - first:
-      213: 5969224511591500015
-    second: spritesheetIDLESkeleton_3
+      213: 7896879507418422366
+    second: Player1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -122,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spritesheetIDLESkeleton_0
+      name: Player1_0
       rect:
         serializedVersion: 2
-        x: 648
-        y: 492
-        width: 747
-        height: 1076
+        x: 628
+        y: 477
+        width: 768
+        height: 1152
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,74 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e79a85ab4e1199b20800000000000000
-      internalID: 3141561889144220030
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spritesheetIDLESkeleton_1
-      rect:
-        serializedVersion: 2
-        x: 2716
-        y: 492
-        width: 747
-        height: 1062
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cdeda89dbb525e690800000000000000
-      internalID: -7573605709614752036
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spritesheetIDLESkeleton_2
-      rect:
-        serializedVersion: 2
-        x: 4784
-        y: 492
-        width: 747
-        height: 1076
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dd675ac7345a177b0800000000000000
-      internalID: -5228215983127824675
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spritesheetIDLESkeleton_3
-      rect:
-        serializedVersion: 2
-        x: 6852
-        y: 492
-        width: 747
-        height: 1062
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fe847f52112f6d250800000000000000
-      internalID: 5969224511591500015
+      spriteID: e5c9cb1921a579d60800000000000000
+      internalID: 7896879507418422366
       vertices: []
       indices: 
       edges: []
@@ -222,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Player1_0: 7896879507418422366
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
