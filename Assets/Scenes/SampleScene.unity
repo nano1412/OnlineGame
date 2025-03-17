@@ -889,6 +889,11 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1207087053 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1778629639123319811, guid: af7412dfa099e4ca4bc359b27432db92, type: 3}
+  m_PrefabInstance: {fileID: 295140781}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1285014135
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,6 +983,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1405637661}
   - component: {fileID: 1405637660}
+  - component: {fileID: 1405637662}
   m_Layer: 0
   m_Name: Login Manager
   m_TagString: Untagged
@@ -994,11 +1000,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1405637659}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92b4f5958689a124c890c8b3597afc16, type: 3}
+  m_Script: {fileID: 11500000, guid: b5649595819474b4aac86f7e24409413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AlternatePlayerPrefabs: d85dbceed8df2cf2d76a6c12
   loginPanel: {fileID: 295140783}
   leaveButton: {fileID: 738275993}
+  hostButton: {fileID: 1506686868}
+  clientButton: {fileID: 1207087053}
 --- !u!4 &1405637661
 Transform:
   m_ObjectHideFlags: 0
@@ -1014,6 +1023,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1405637662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405637659}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b4f5958689a124c890c8b3597afc16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterSelectionImages: []
+  AlternatePlayerPrefabs:
+  - 4005322200
+  - 4063027160
+  - 309095127
+  loginPanel: {fileID: 295140783}
+  leaveButton: {fileID: 738275993}
+  selectedCharacterId: 0
 --- !u!1 &1472954839
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,6 +1281,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1506686868 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1778629640342350423, guid: af7412dfa099e4ca4bc359b27432db92, type: 3}
+  m_PrefabInstance: {fileID: 295140781}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1514568389
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,7 +1356,7 @@ MonoBehaviour:
       - {fileID: 11400000, guid: feacfa958c5d4a1418c75412f019b8db, type: 2}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
-    ConnectionApproval: 0
+    ConnectionApproval: 1
     ConnectionData: 
     EnableTimeResync: 0
     TimeResyncInterval: 30
@@ -1576,37 +1610,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2034209073}
   m_CullTransparentMesh: 1
---- !u!1 &2041845993
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2041845994}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2041845994
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2041845993}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.6543164, y: -2.8813984, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1616,5 +1619,4 @@ SceneRoots:
   - {fileID: 1514568392}
   - {fileID: 1477054075}
   - {fileID: 1285014138}
-  - {fileID: 2041845994}
   - {fileID: 1405637661}
