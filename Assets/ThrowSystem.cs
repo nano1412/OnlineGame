@@ -95,18 +95,10 @@ public class ThrowSystem : NetworkBehaviour
         print(mouse_pos.x);
         print(mouse_pos.y);
         GameObject newBomb = Instantiate(bomb, hand.transform.Find("bombRelease").position, Quaternion.identity,transform);
-        //newBomb.GetComponent<NetworkObject>().Spawn(true);
+        newBomb.GetComponent<NetworkObject>().Spawn(true);
 
-        ThrowClientRpc(newBomb);
-        // add force depend on angle of hand and power
-
-        
-    }
-
-    [ClientRpc]
-    void ThrowClientRpc(GameObject bomb)
-    {
         bomb.GetComponent<Rigidbody2D>().AddForce(new Vector2(mouse_pos.x, mouse_pos.y) * power * powerMultiplier, ForceMode2D.Impulse);
         power = 1;
+     
     }
 }
