@@ -4,6 +4,7 @@ using Unity.Netcode;
 //public class Playermovement : MonoBehaviour
 public class Playermovement : NetworkBehaviour
 {
+    private float health = 5f;
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
     public bool isLeft = false;
@@ -83,5 +84,19 @@ public class Playermovement : NetworkBehaviour
         {
             isGrounded = true;
         }
+    }
+
+    [ServerRpc]
+    public void TakeDamageServerRpc(float damage)
+    {
+        health -= damage;
+        Debug.Log($"Player {OwnerClientId} took {damage} damage! Current HP: {health}");
+        TakeDamageClientRpc(damage);
+    }
+
+    [ClientRpc]
+    private void TakeDamageClientRpc(float damage)
+    {
+        Debug.Log($"Player {OwnerClientId} HP updated: {health}");
     }
 }

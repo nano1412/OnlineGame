@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: -2122734194979886216}
   m_Layer: 0
   m_Name: Player3
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -208,7 +208,7 @@ MonoBehaviour:
   networkManager: {fileID: 0}
   bomb: {fileID: 0}
   arrow: {fileID: 0}
-  angle: 0
+  hand: {fileID: 0}
 --- !u!114 &-5187209496998219895
 MonoBehaviour:
   m_ObjectHideFlags: 0
