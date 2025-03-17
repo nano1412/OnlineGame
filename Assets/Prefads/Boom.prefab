@@ -207,4 +207,4 @@ MonoBehaviour:
   explosionRadius: 5
   countdown: 10
   hitSound: {fileID: 0}
-  boomPrefab: {fileID: 0}
+  boomPrefab: {fileID: 5317098292680755031}
