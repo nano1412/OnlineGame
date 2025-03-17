@@ -24,13 +24,21 @@ public class ThrowSystem : NetworkBehaviour
         playermovement = transform.GetComponent<Playermovement>();
         handSpriteRenderer = hand.transform.GetComponent<SpriteRenderer>();
 
+        playermovement.isFlipped.OnValueChanged += HandleFlipChange;
+
+    }
+
+    private void HandleFlipChange(bool previous, bool current)
+    {
+        // Update the sprite's flipX based on the NetworkVariable's value
+        handSpriteRenderer.flipX = current;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (!IsOwner) return;
-            handSpriteRenderer.flipX = playermovement.isFlipped.Value;
+            
 
             mouse_pos = Input.mousePosition;
             mouse_pos.z = -20;
