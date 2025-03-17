@@ -92,6 +92,8 @@ public class Playermovement : NetworkBehaviour
         // Update the NetworkVariable on the server
         isFlipped.Value = newFlipState;
     }
+
+    [ServerRpc]
     public void TakeDamageServerRpc(float damage)
     {
         health -= damage;

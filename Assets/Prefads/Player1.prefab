@@ -210,7 +210,8 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   moveSpeed: 5
   jumpForce: 7
-  isLeft: 0
+  isFlipped:
+    m_InternalValue: 0
 --- !u!114 &3229095517184326822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,11 +225,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  networkManager: {fileID: 5322776033931074710, guid: ef117508589decd44b7a2a96dcf8a7ee, type: 3}
-  bomb: {fileID: 0}
-  arrow: {fileID: 0}
   hand: {fileID: 9180340485198870919}
-  handSpriteRenderer: {fileID: 0}
+  bomb: {fileID: 5317098292680755031, guid: 5661f2f1ed0da064d915ca6e123fb6dd, type: 3}
+  arrow: {fileID: 0}
+  chargeSpeed: 3
+  power: 0
+  maxPower: 10
 --- !u!114 &-8775951296895834039
 MonoBehaviour:
   m_ObjectHideFlags: 0
