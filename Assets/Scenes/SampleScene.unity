@@ -1035,14 +1035,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b4f5958689a124c890c8b3597afc16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterSelectionImages: []
-  AlternatePlayerPrefabs:
-  - 4005322200
-  - 4063027160
-  - 309095127
-  loginPanel: {fileID: 295140783}
-  leaveButton: {fileID: 738275993}
-  selectedCharacterId: 0
 --- !u!1 &1472954839
 GameObject:
   m_ObjectHideFlags: 0
