@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 5c6c46bb75e090442b25b3f1434c49e1
+guid: 7dc2ddea3eac53149af79d8e30c9fce7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2467762338876050911
-    second: spritesheetIDLE_0
+      213: -4998941170826908333
+    second: spritesheetIDLEKnight_0
   - first:
-      213: 4688950357933689464
-    second: spritesheetIDLE_1
+      213: 4871882469058011458
+    second: spritesheetIDLEKnight_1
   - first:
-      213: -1323615219559576766
-    second: spritesheetIDLE_2
+      213: 782716629158472346
+    second: spritesheetIDLEKnight_2
   - first:
-      213: -6969473792428470038
-    second: spritesheetIDLE_3
+      213: 117696319312360649
+    second: spritesheetIDLEKnight_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -122,89 +122,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spritesheetIDLE_0
+      name: spritesheetIDLEKnight_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 2068
-        height: 2068
+        x: 638
+        y: 487
+        width: 768
+        height: 1152
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fdd4bceb5c04f3220800000000000000
-      internalID: 2467762338876050911
+      spriteID: 35d69cb9d7130aab0800000000000000
+      internalID: -4998941170826908333
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheetIDLE_1
+      name: spritesheetIDLEKnight_1
       rect:
         serializedVersion: 2
-        x: 2068
-        y: 0
-        width: 2068
-        height: 2068
+        x: 2706
+        y: 487
+        width: 768
+        height: 1138
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 87a0416e18f721140800000000000000
-      internalID: 4688950357933689464
+      spriteID: 241e7a31b476c9340800000000000000
+      internalID: 4871882469058011458
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheetIDLE_2
+      name: spritesheetIDLEKnight_2
       rect:
         serializedVersion: 2
-        x: 4136
-        y: 0
-        width: 2068
-        height: 2068
+        x: 4774
+        y: 487
+        width: 768
+        height: 1152
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 24bc9da78f291ade0800000000000000
-      internalID: -1323615219559576766
+      spriteID: a9a28c090a4ccda00800000000000000
+      internalID: 782716629158472346
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheetIDLE_3
+      name: spritesheetIDLEKnight_3
       rect:
         serializedVersion: 2
-        x: 6204
-        y: 0
-        width: 2068
-        height: 2068
+        x: 6842
+        y: 487
+        width: 768
+        height: 1138
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ae018eaf284774f90800000000000000
-      internalID: -6969473792428470038
+      spriteID: 9c4fbf7cd2422a100800000000000000
+      internalID: 117696319312360649
       vertices: []
       indices: 
       edges: []
@@ -213,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ba6a5f7828db7a943b4b9a5db41af5c4
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -223,10 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      spritesheetIDLE_0: 2467762338876050911
-      spritesheetIDLE_1: 4688950357933689464
-      spritesheetIDLE_2: -1323615219559576766
-      spritesheetIDLE_3: -6969473792428470038
+      spritesheetIDLEKnight_0: -4998941170826908333
+      spritesheetIDLEKnight_1: 4871882469058011458
+      spritesheetIDLEKnight_2: 782716629158472346
+      spritesheetIDLEKnight_3: 117696319312360649
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

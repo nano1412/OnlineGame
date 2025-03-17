@@ -1,6 +1,8 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class Playermovement : MonoBehaviour
+//public class Playermovement : MonoBehaviour
+public class Playermovement : NetworkBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
@@ -15,12 +17,29 @@ public class Playermovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (IsOwner)
+        {
+            // กำหนดตำแหน่งเริ่มต้น
+            if (NetworkManager.Singleton.IsHost)
+            {
+                transform.position = new Vector3(-5f, 1f, 0f);  // Host เริ่มที่ซ้าย
+            }
+            else if (NetworkManager.Singleton.IsClient)
+            {
+                transform.position = new Vector3(5f, 1f, 0f);  // Client เริ่มที่ขวา
+            }
+        }
     }
 
     void Update()
     {
-        Move();
-        Jump();
+        if (IsOwner)
+        {
+            Move();
+            Jump();
+        }
+            
     }
 
     void Move()
@@ -37,6 +56,7 @@ public class Playermovement : MonoBehaviour
             isLeft = false;
         }
 
+        //rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
 
         if (moveInput > 0)
@@ -49,8 +69,9 @@ public class Playermovement : MonoBehaviour
     {
         //isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
 
-        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+        if ((Input.GetKeyDown(KeyCode.W) && isGrounded) || (Input.GetKeyDown(KeyCode.Space) && isGrounded) )
         {
+            //rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             isGrounded = false;
         }
