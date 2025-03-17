@@ -228,7 +228,7 @@ MonoBehaviour:
   hand: {fileID: 9180340485198870919}
   bomb: {fileID: 5317098292680755031, guid: 5661f2f1ed0da064d915ca6e123fb6dd, type: 3}
   arrow: {fileID: 0}
-  chargeSpeed: 1
+  chargeSpeed: 0.5
   power: 0
   powerMultiplier: 0.1
   maxPower: 10
