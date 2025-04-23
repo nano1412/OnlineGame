@@ -13,7 +13,7 @@ public class LoginManager : MonoBehaviour
     public GameObject leaveButton;
     public GameObject hostButton;
     public GameObject clientButton;
-    //public GameObject scorePanel;
+    public GameObject scorePanel;
 
     private void Start()
     {
@@ -27,7 +27,7 @@ public class LoginManager : MonoBehaviour
     {
         loginPanel.SetActive(!isUserLogin);
         leaveButton.SetActive(isUserLogin);
-        //scorePanel.SetActive(isUserLogin);
+        scorePanel.SetActive(isUserLogin);
     }
 
     private void HandleClientDisconnect(ulong clientId)

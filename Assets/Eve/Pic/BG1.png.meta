@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 649222ddbdf84bc4396909f09caf50fd
+guid: ad8e70f687b1b064f8ddad4eb1cfe596
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2625459967315071155
-    second: BomSprite_0
-  - first:
-      213: 7265274740158109114
-    second: BomSprite_1
-  - first:
-      213: 1217548625536564182
-    second: BomSprite_2
-  - first:
-      213: -5318153281135659715
-    second: BomSprite_3
+      213: 3095648225022645599
+    second: BG1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -60,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 700
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -122,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BomSprite_0
+      name: BG1_0
       rect:
         serializedVersion: 2
-        x: 181
-        y: 66
-        width: 677
-        height: 935
+        x: 0
+        y: 0
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,74 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d4f2d2ce11e709bd0800000000000000
-      internalID: -2625459967315071155
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BomSprite_1
-      rect:
-        serializedVersion: 2
-        x: 1281
-        y: 66
-        width: 725
-        height: 976
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ab51eb212e073d460800000000000000
-      internalID: 7265274740158109114
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BomSprite_2
-      rect:
-        serializedVersion: 2
-        x: 2381
-        y: 66
-        width: 677
-        height: 935
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6db3fd9260a95e010800000000000000
-      internalID: 1217548625536564182
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BomSprite_3
-      rect:
-        serializedVersion: 2
-        x: 3481
-        y: 66
-        width: 725
-        height: 976
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d35b4d084cf1236b0800000000000000
-      internalID: -5318153281135659715
+      spriteID: f551b02c8a3f5fa20800000000000000
+      internalID: 3095648225022645599
       vertices: []
       indices: 
       edges: []
@@ -222,11 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      BomSprite_0: -2625459967315071155
-      BomSprite_1: 7265274740158109114
-      BomSprite_2: 1217548625536564182
-      BomSprite_3: -5318153281135659715
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
