@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.XR;
 
 //public class Playermovement : MonoBehaviour
 public class Playermovement : NetworkBehaviour
@@ -13,9 +14,13 @@ public class Playermovement : NetworkBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private bool isGrounded;
+    [SerializeField] private Vector3 throwPointStartPosition;
+    private GameObject throwPoint;
 
     void Start()
     {
+        throwPoint = transform.Find("hand").gameObject.transform.Find("bombRelease").gameObject;
+        throwPointStartPosition = throwPoint.transform.position;
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         isFlipped.OnValueChanged += HandleFlipChange;
@@ -36,6 +41,14 @@ public class Playermovement : NetworkBehaviour
     {
         // Apply the flip based on the network value
         spriteRenderer.flipX = current;
+        //if (current)
+        //{
+        //    throwPoint.transform.position = new Vector3(-throwPointStartPosition.x, -throwPointStartPosition.y, throwPointStartPosition.z) ;
+        //}
+        //else
+        //{
+        //    throwPoint.transform.position = new Vector3(throwPointStartPosition.x, throwPointStartPosition.y, throwPointStartPosition.z);
+        //}
     }
 
     void Update()
