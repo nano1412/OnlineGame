@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 3313003314051329849}
   - component: {fileID: -796302096293194749}
   - component: {fileID: 8850415423270949331}
-  - component: {fileID: 1915690391280510169}
-  - component: {fileID: -7406697105720961442}
+  - component: {fileID: 4084531569365459617}
+  - component: {fileID: 5003550212348759038}
   m_Layer: 0
   m_Name: Boom
   m_TagString: Boom
@@ -211,7 +211,7 @@ MonoBehaviour:
   armTime: 2
   hitSound: {fileID: 0}
   boomPrefab: {fileID: 5317098292680755031}
---- !u!114 &1915690391280510169
+--- !u!114 &4084531569365459617
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5317098292680755031}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df2868252ab5c4d1da357e8f11f1b524, type: 3}
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
@@ -247,7 +247,7 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &-7406697105720961442
+--- !u!114 &5003550212348759038
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -262,5 +262,5 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkRigidbodyBaseExpanded: 0
   UseRigidBodyForMotion: 0
-  AutoUpdateKinematicState: 1
-  AutoSetKinematicOnDespawn: 1
+  AutoUpdateKinematicState: 0
+  AutoSetKinematicOnDespawn: 0

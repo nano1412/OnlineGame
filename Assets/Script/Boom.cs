@@ -4,17 +4,28 @@ using Unity.Netcode;
 public class Boom : NetworkBehaviour
 {
     private Transform target;
-    public float speed = 70f;
     public float damage = 10;
     public float explosionRadius = 5f;
-    public float countdown = 3f; // ÃÐàºÔ´ËÅÑ§¨Ò¡ 3 ÇÔ¹Ò·Õ
+    public float countdown = 3f; // ï¿½ï¿½ï¿½Ô´ï¿½ï¿½Ñ§ï¿½Ò¡ 3 ï¿½Ô¹Ò·ï¿½
     private bool hasExploded = false;
+    [SerializeField] float lifeTime = 2;
     [SerializeField] float armTime = 2;
 
     public AudioClip hitSound;
     private AudioSource audioSource;
 
+    private Vector2 initialDirection;
+    private float initialForce;
+    private bool applyForce;
+
     public GameObject boomPrefab;
+
+    public void Initialize(Vector2 direction, float force)
+    {
+        initialDirection = direction;
+        initialForce = force;
+        applyForce = true;
+    }
 
     private void Start()
     {
@@ -22,29 +33,16 @@ public class Boom : NetworkBehaviour
         Invoke(nameof(ExplodeServerRpc), countdown);
     }
 
-    public void Seek(Transform _target)
+    void FixedUpdate()
     {
-        target = _target;
-    }
-
-    void Update()
-    {
+        lifeTime -= Time.deltaTime;
         armTime -= Time.deltaTime;
-        if (target == null)
+        if (applyForce)
         {
-            return;
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            rb.linearVelocity = initialDirection * initialForce;
+            applyForce = false;
         }
-
-        Vector3 dir = target.position - transform.position;
-        float distanceThisFrame = speed * Time.deltaTime;
-
-        if (dir.magnitude <= distanceThisFrame)
-        {
-            ExplodeServerRpc();
-            return;
-        }
-
-        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -75,14 +73,14 @@ public class Boom : NetworkBehaviour
     [ClientRpc(RequireOwnership = false)]
     void ExplodeClientRpc()
     {
-        // à¾ÔèÁàÍ¿à¿¡µìÃÐàºÔ´·Õè·Ø¡ä¤ÅàÍ¹µìàËç¹¾ÃéÍÁ¡Ñ¹
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Í¿à¿¡ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½Ø¡ï¿½ï¿½ï¿½Í¹ï¿½ï¿½ï¿½ï¿½ç¹¾ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¹
         Debug.Log("Boom exploded!");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Playermovement player = collision.gameObject.GetComponent<Playermovement>();
-        if (player != null && armTime < 0)
+        
+        if ((collision.gameObject.CompareTag("Player") || lifeTime < 0) && armTime < 0)
         {
             ExplodeServerRpc();
         }

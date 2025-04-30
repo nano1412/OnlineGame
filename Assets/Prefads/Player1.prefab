@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: -8511121676639027657}
   - component: {fileID: 3229095517184326822}
   - component: {fileID: -8775951296895834039}
-  - component: {fileID: -8132773643052958126}
-  - component: {fileID: -8440828869421941485}
+  - component: {fileID: 2559539365029796519}
+  - component: {fileID: -2666625556715836551}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -231,12 +231,12 @@ MonoBehaviour:
   throwPointDistance: 1.5
   bomb: {fileID: 5317098292680755031, guid: 5661f2f1ed0da064d915ca6e123fb6dd, type: 3}
   arrow: {fileID: 0}
-  chargeSpeed: 0.5
-  power: 0
-  powerMultiplier: 0.1
-  maxPower: 10
-  cooldown: 2
+  powerMultiplier: 5
+  cooldown: 1
   cooldowncount: 0
+  minThrowForce: 5
+  maxThrowForce: 20
+  chargeSpeed: 0.5
 --- !u!114 &-8775951296895834039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,7 +266,7 @@ MonoBehaviour:
     PacketDelayMS: 0
     PacketJitterMS: 0
     PacketDropRate: 0
---- !u!114 &-8132773643052958126
+--- !u!114 &2559539365029796519
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -302,7 +302,7 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &-8440828869421941485
+--- !u!114 &-2666625556715836551
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

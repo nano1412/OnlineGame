@@ -6,8 +6,8 @@ public class ThrowSystem : NetworkBehaviour
 {
     [SerializeField] GameObject hand;
     [SerializeField] GameObject BombReleasePoint;
-
     [SerializeField] float throwPointDistance;
+
     SpriteRenderer handSpriteRenderer;
     Playermovement playermovement;
     private Vector3 defaultHandPostion;
@@ -17,12 +17,18 @@ public class ThrowSystem : NetworkBehaviour
 
     [SerializeField] GameObject bomb;
     [SerializeField] GameObject arrow;
-    [SerializeField] float chargeSpeed = 1;
-    [SerializeField] float power;
-    [SerializeField] float powerMultiplier = 0.1f;
-    [SerializeField] private float maxPower = 10;
+    //[SerializeField] float power;
+    //[SerializeField] private float maxPower = 10;
+    [SerializeField] float powerMultiplier = 10f;
     [SerializeField] float cooldown = 2;
     [SerializeField] float cooldowncount;
+
+    public float minThrowForce = 5f;
+    public float maxThrowForce = 20f;
+    public float chargeSpeed = 10f;
+
+    private float currentCharge;
+    private bool isCharging;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -47,9 +53,11 @@ public class ThrowSystem : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
+
         UpdateHand();
-        ChargeUp();
         UpdateThrowPosition();
+        ChargeUp();
 
     }
 
@@ -81,16 +89,32 @@ public class ThrowSystem : NetworkBehaviour
     {
         cooldowncount -= Time.deltaTime;
 
-        if (Input.GetMouseButton(0) && cooldowncount < 0 && power < maxPower)
+        if (Input.GetMouseButton(0) && cooldowncount < 0)
         {
-            power += Time.deltaTime * chargeSpeed;
+            isCharging = true;
+            currentCharge = minThrowForce;
         }
 
-        if (Input.GetMouseButtonUp(0) && cooldowncount < 0)
+        if (Input.GetMouseButton(0) && isCharging)
+        {
+            currentCharge += chargeSpeed * Time.deltaTime;
+            currentCharge = Mathf.Clamp(currentCharge, minThrowForce, maxThrowForce);
+        }
+
+        if (Input.GetMouseButtonUp(0) && cooldowncount < 0 && isCharging)
         {
             cooldowncount = cooldown;
-            ThrowBombServerRpc();
+
+                Vector2 direction = GetMouseDirection();
+                ThrowBombServerRpc(direction, currentCharge * powerMultiplier);
+                isCharging = false;
         }
+    }
+
+    Vector2 GetMouseDirection()
+    {
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        return (mouseWorld - BombReleasePoint.transform.position).normalized;
     }
 
     void UpdateThrowPosition()
@@ -104,16 +128,25 @@ public class ThrowSystem : NetworkBehaviour
         BombReleasePoint.transform.position = transform.position + direction;
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    void ThrowBombServerRpc()
+    [ServerRpc]
+    void ThrowBombServerRpc(Vector2 direction, float force)
     {
-        print(mouse_pos.x);
-        print(mouse_pos.y);
-        GameObject newBomb = Instantiate(bomb, hand.transform.Find("bombRelease").position, Quaternion.identity,transform);
-        newBomb.GetComponent<NetworkObject>().Spawn(true);
+        GameObject newbomb = Instantiate(bomb, BombReleasePoint.transform.position, Quaternion.identity);
+        var netObj = newbomb.GetComponent<NetworkObject>();
+        netObj.Spawn();
 
-        bomb.GetComponent<Rigidbody2D>().AddForce(new Vector2(mouse_pos.x, mouse_pos.y) * power * powerMultiplier, ForceMode2D.Impulse);
-        power = 1;
-     
+        newbomb.GetComponent<Boom>().Initialize(direction, force);
     }
+
+    //[ServerRpc(RequireOwnership = false)]
+    //void ThrowBombServerRpc(Vector2 throwForce)
+    //{
+    //    GameObject newBomb = Instantiate(bomb, BombReleasePoint.transform.position, Quaternion.identity);
+    //    newBomb.GetComponent<NetworkObject>().Spawn(true);
+
+    //    //newBomb.GetComponent<Rigidbody2D>().AddForce(throwForce, ForceMode2D.Impulse);
+    //    newBomb.GetComponent<Rigidbody2D>().linearVelocity = throwForce;
+
+
+    //}
 }
