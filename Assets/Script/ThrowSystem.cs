@@ -5,7 +5,9 @@ using static UnityEngine.GraphicsBuffer;
 public class ThrowSystem : NetworkBehaviour
 {
     [SerializeField] GameObject hand;
+    [SerializeField] GameObject BombReleasePoint;
 
+    [SerializeField] float throwPointDistance;
     SpriteRenderer handSpriteRenderer;
     Playermovement playermovement;
     private Vector3 defaultHandPostion;
@@ -28,6 +30,7 @@ public class ThrowSystem : NetworkBehaviour
     {
         defaultHandPostion = hand.transform.localPosition;
         hand = transform.Find("hand").gameObject;
+        BombReleasePoint = hand.transform.Find("bombRelease").gameObject;
         playermovement = transform.GetComponent<Playermovement>();
         handSpriteRenderer = hand.transform.GetComponent<SpriteRenderer>();
 
@@ -46,6 +49,7 @@ public class ThrowSystem : NetworkBehaviour
     {
         UpdateHand();
         ChargeUp();
+        UpdateThrowPosition();
 
     }
 
@@ -87,6 +91,17 @@ public class ThrowSystem : NetworkBehaviour
             cooldowncount = cooldown;
             ThrowBombServerRpc();
         }
+    }
+
+    void UpdateThrowPosition()
+    {
+        
+        Vector3 direction = mouse_pos - transform.position;
+        if (direction.magnitude > throwPointDistance)
+        {
+            direction = direction.normalized * throwPointDistance;
+        }
+        BombReleasePoint.transform.position = transform.position + direction;
     }
 
     [ServerRpc(RequireOwnership = false)]
