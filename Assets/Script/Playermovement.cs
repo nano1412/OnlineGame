@@ -12,7 +12,7 @@ public class Playermovement : NetworkBehaviour
     //public LayerMask groundLayer;
 
     private Rigidbody2D rb;
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer bodySpriteRenderer;
     private bool isGrounded;
     [SerializeField] private Vector3 throwPointStartPosition;
     private GameObject throwPoint;
@@ -22,7 +22,7 @@ public class Playermovement : NetworkBehaviour
         throwPoint = transform.Find("hand").gameObject.transform.Find("bombRelease").gameObject;
         throwPointStartPosition = throwPoint.transform.position;
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        bodySpriteRenderer = transform.Find("body").GetComponent<SpriteRenderer>();
         isFlipped.OnValueChanged += HandleFlipChange;
 
         if (!IsOwner) return;
@@ -39,16 +39,9 @@ public class Playermovement : NetworkBehaviour
 
     private void HandleFlipChange(bool previous, bool current)
     {
-        // Apply the flip based on the network value
-        spriteRenderer.flipX = current;
-        //if (current)
-        //{
-        //    throwPoint.transform.position = new Vector3(-throwPointStartPosition.x, -throwPointStartPosition.y, throwPointStartPosition.z) ;
-        //}
-        //else
-        //{
-        //    throwPoint.transform.position = new Vector3(throwPointStartPosition.x, throwPointStartPosition.y, throwPointStartPosition.z);
-        //}
+
+        bodySpriteRenderer.flipX = current;
+
     }
 
     void Update()

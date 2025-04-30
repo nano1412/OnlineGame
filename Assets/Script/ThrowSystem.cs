@@ -106,7 +106,7 @@ public class ThrowSystem : NetworkBehaviour
             cooldowncount = cooldown;
 
                 Vector2 direction = GetMouseDirection();
-                ThrowBombServerRpc(direction, currentCharge * powerMultiplier);
+                ThrowBombServerRpc(direction, currentCharge * powerMultiplier, BombReleasePoint.transform.position);
                 isCharging = false;
         }
     }
@@ -129,24 +129,12 @@ public class ThrowSystem : NetworkBehaviour
     }
 
     [ServerRpc]
-    void ThrowBombServerRpc(Vector2 direction, float force)
+    void ThrowBombServerRpc(Vector2 direction, float force, Vector3 throwPosition)
     {
-        GameObject newbomb = Instantiate(bomb, BombReleasePoint.transform.position, Quaternion.identity);
+        GameObject newbomb = Instantiate(bomb, throwPosition, Quaternion.identity);
         var netObj = newbomb.GetComponent<NetworkObject>();
         netObj.Spawn();
 
         newbomb.GetComponent<Boom>().Initialize(direction, force);
     }
-
-    //[ServerRpc(RequireOwnership = false)]
-    //void ThrowBombServerRpc(Vector2 throwForce)
-    //{
-    //    GameObject newBomb = Instantiate(bomb, BombReleasePoint.transform.position, Quaternion.identity);
-    //    newBomb.GetComponent<NetworkObject>().Spawn(true);
-
-    //    //newBomb.GetComponent<Rigidbody2D>().AddForce(throwForce, ForceMode2D.Impulse);
-    //    newBomb.GetComponent<Rigidbody2D>().linearVelocity = throwForce;
-
-
-    //}
 }
