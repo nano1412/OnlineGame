@@ -12,11 +12,12 @@ public class Playermovement : NetworkBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
     public NetworkVariable<bool> isFlipped = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    [SerializeField] GameObject playerControllerCanvas;
-    private Button leftbutton;
-    private Button rightbutton;
-    private Button downutton;
-    private Button jumpbutton;
+    [SerializeField] GameObject playerControllerCanvasPrefab;
+    private GameObject playerControllerCanvas;
+    private ButtonHold leftbutton;
+    private ButtonHold rightbutton;
+    private ButtonHold downbutton;
+    private ButtonHold jumpbutton;
     //public LayerMask groundLayer;
 
     public Rigidbody2D rb;
@@ -27,11 +28,11 @@ public class Playermovement : NetworkBehaviour
 
     void Start()
     {
-        Instantiate(playerControllerCanvas);
-        leftbutton = playerControllerCanvas.transform.Find("movementButton").Find("leftbutton").GetComponent<Button>();
-        rightbutton = playerControllerCanvas.transform.Find("movementButton").Find("rightButton").GetComponent<Button>();
-        downutton = playerControllerCanvas.transform.Find("movementButton").Find("dropButton").GetComponent<Button>();
-        jumpbutton = playerControllerCanvas.transform.Find("movementButton").Find("jumpButton").GetComponent<Button>();
+        playerControllerCanvas = Instantiate(playerControllerCanvasPrefab);
+        leftbutton = playerControllerCanvas.transform.Find("movementButton").Find("leftbutton").GetComponent<ButtonHold>();
+        rightbutton = playerControllerCanvas.transform.Find("movementButton").Find("rightButton").GetComponent<ButtonHold>();
+        downbutton = playerControllerCanvas.transform.Find("movementButton").Find("dropButton").GetComponent<ButtonHold>();
+        jumpbutton = playerControllerCanvas.transform.Find("movementButton").Find("jumpButton").GetComponent<ButtonHold>();
 
 
     throwPoint = transform.Find("hand").gameObject.transform.Find("bombRelease").gameObject;
@@ -63,22 +64,22 @@ public class Playermovement : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        if (UnityEngine.Input.GetKey(KeyCode.A))
+        if (UnityEngine.Input.GetKey(KeyCode.A) || leftbutton.isHolding)
         {
             MoveLeft();
         }
 
-        if (UnityEngine.Input.GetKey(KeyCode.S))
+        if (UnityEngine.Input.GetKey(KeyCode.S) || downbutton.isHolding)
         {
             Drop();
         }
 
-        if (UnityEngine.Input.GetKey(KeyCode.D))
+        if (UnityEngine.Input.GetKey(KeyCode.D) || rightbutton.isHolding)
         {
             MoveRight();
         }
 
-        if ((UnityEngine.Input.GetKeyDown(KeyCode.W) && isGrounded) || (UnityEngine.Input.GetKeyDown(KeyCode.Space) && isGrounded))
+        if ((UnityEngine.Input.GetKeyDown(KeyCode.W) || UnityEngine.Input.GetKeyDown(KeyCode.Space) || jumpbutton.isHolding )&& isGrounded)
         {
             Jump();
         }
