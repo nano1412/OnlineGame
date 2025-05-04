@@ -156,6 +156,7 @@ MonoBehaviour:
   jumpForce: 7
   isFlipped:
     m_InternalValue: 0
+  playerControllerCanvas: {fileID: 8182433420007211335, guid: 98c8d685b3f17ed40878c3a6be87227f, type: 3}
   throwPointStartPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &3229095517184326822
 MonoBehaviour:

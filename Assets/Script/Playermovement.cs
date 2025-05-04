@@ -1,6 +1,9 @@
 using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.XR;
+using UnityEngine.UI;
+using UnityEngine.Windows;
+using UnityEngine.EventSystems;
 
 //public class Playermovement : MonoBehaviour
 public class Playermovement : NetworkBehaviour
@@ -9,9 +12,14 @@ public class Playermovement : NetworkBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
     public NetworkVariable<bool> isFlipped = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    [SerializeField] GameObject playerControllerCanvas;
+    private Button leftbutton;
+    private Button rightbutton;
+    private Button downutton;
+    private Button jumpbutton;
     //public LayerMask groundLayer;
 
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private SpriteRenderer bodySpriteRenderer;
     private bool isGrounded;
     [SerializeField] private Vector3 throwPointStartPosition;
@@ -19,7 +27,14 @@ public class Playermovement : NetworkBehaviour
 
     void Start()
     {
-        throwPoint = transform.Find("hand").gameObject.transform.Find("bombRelease").gameObject;
+        Instantiate(playerControllerCanvas);
+        leftbutton = playerControllerCanvas.transform.Find("movementButton").Find("leftbutton").GetComponent<Button>();
+        rightbutton = playerControllerCanvas.transform.Find("movementButton").Find("rightButton").GetComponent<Button>();
+        downutton = playerControllerCanvas.transform.Find("movementButton").Find("dropButton").GetComponent<Button>();
+        jumpbutton = playerControllerCanvas.transform.Find("movementButton").Find("jumpButton").GetComponent<Button>();
+
+
+    throwPoint = transform.Find("hand").gameObject.transform.Find("bombRelease").gameObject;
         throwPointStartPosition = throwPoint.transform.position;
         rb = GetComponent<Rigidbody2D>();
         bodySpriteRenderer = transform.Find("body").GetComponent<SpriteRenderer>();
@@ -48,40 +63,54 @@ public class Playermovement : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        Move();
-        Jump();
-        
+        if (UnityEngine.Input.GetKey(KeyCode.A))
+        {
+            MoveLeft();
+        }
+
+        if (UnityEngine.Input.GetKey(KeyCode.S))
+        {
+            Drop();
+        }
+
+        if (UnityEngine.Input.GetKey(KeyCode.D))
+        {
+            MoveRight();
+        }
+
+        if ((UnityEngine.Input.GetKeyDown(KeyCode.W) && isGrounded) || (UnityEngine.Input.GetKeyDown(KeyCode.Space) && isGrounded))
+        {
+            Jump();
+        }
             
     }
 
-    void Move()
+    public void MoveLeft()
     {
-        float moveInput = 0f;
-        if (Input.GetKey(KeyCode.A))
-        {
-            moveInput = -1f;
-            isFlipped.Value = true;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            moveInput = 1f;
-            isFlipped.Value = false;
-        }
-
-        //rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        isFlipped.Value = true;   
+        rb.linearVelocity = new Vector2(-1f * moveSpeed, rb.linearVelocity.y);
     }
 
-    void Jump()
+    public void MoveRight()
+    {
+        isFlipped.Value = false;
+        rb.linearVelocity = new Vector2(1f * moveSpeed, rb.linearVelocity.y);
+    }
+
+    public void Drop()
+    {
+
+    }
+
+    public void Jump()
     {
         //isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
 
-        if ((Input.GetKeyDown(KeyCode.W) && isGrounded) || (Input.GetKeyDown(KeyCode.Space) && isGrounded) )
-        {
+        
             //rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             isGrounded = false;
-        }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -113,3 +142,4 @@ public class Playermovement : NetworkBehaviour
         Debug.Log($"Player {OwnerClientId} HP updated: {health}");
     }
 }
+
