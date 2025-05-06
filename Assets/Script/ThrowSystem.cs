@@ -77,17 +77,13 @@ public class ThrowSystem : NetworkBehaviour
         if (gameController.isPC)
         {
             UpdateHandPC();
-            UpdateHand();
-            UpdateThrowPositionPC();
-            ChargeUp();
+            UpdateThrowPosition(mouse_pos - transform.position);
         } else
         {
             UpdateHandMobile();
-            UpdateHand();
-            UpdateThrowPositionMobile();
-            ChargeUp();
+            UpdateThrowPosition(rotationCircle.transform.position - rotationOuterCircle.transform.position);
         }
-
+        ChargeUp();
     }
 
     void UpdateHandPC()
@@ -102,7 +98,7 @@ public class ThrowSystem : NetworkBehaviour
         mouse_pos.y = mouse_pos.y - object_pos.y;
         angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
 
-        
+        UpdateHand();
     }
 
     void UpdateHandMobile()
@@ -129,10 +125,13 @@ public class ThrowSystem : NetworkBehaviour
         {
             touchStart = false;
         }
+
+        UpdateHand();
     }
 
     private void FixedUpdate()
     {
+        // for UpdateHandMobile();
         if (touchStart && !gameController.isPC && IsOwner)
         {
             if (Input.mousePosition.x > middleOfScreen)
@@ -192,35 +191,14 @@ public class ThrowSystem : NetworkBehaviour
         }
     }
 
-    Vector2 GetMouseDirection()
+    void UpdateThrowPosition(Vector3 direction)
     {
-        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        return (mouseWorld - BombReleasePoint.transform.position).normalized;
-    }
-
-    void UpdateThrowPositionPC()
-    {
-        
-        Vector3 direction = mouse_pos - transform.position;
         if (direction.magnitude > throwPointDistance)
         {
             direction = direction.normalized * throwPointDistance;
         }
         BombReleasePoint.transform.position = transform.position + direction;
     }
-
-    void UpdateThrowPositionMobile()
-    {
-
-        Vector3 direction = rotationCircle.transform.position - rotationOuterCircle.transform.position;
-        if (direction.magnitude > throwPointDistance)
-        {
-            direction = direction.normalized * throwPointDistance;
-        }
-        BombReleasePoint.transform.position = transform.position + direction;
-    }
-
-
 
     [ServerRpc]
     void ThrowBombServerRpc(Vector3 direction, float force, Vector3 throwPosition)
