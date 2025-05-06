@@ -79,11 +79,13 @@ public class ThrowSystem : NetworkBehaviour
             UpdateHandPC();
             UpdateHand();
             UpdateThrowPositionPC();
-            ChargeUpPC();
+            ChargeUp();
         } else
         {
             UpdateHandMobile();
             UpdateHand();
+            UpdateThrowPositionMobile();
+            ChargeUp();
         }
 
     }
@@ -164,7 +166,7 @@ public class ThrowSystem : NetworkBehaviour
         }
     }
 
-    void ChargeUpPC()
+    void ChargeUp()
     {
         cooldowncount -= Time.deltaTime;
 
@@ -184,7 +186,7 @@ public class ThrowSystem : NetworkBehaviour
         {
             cooldowncount = cooldown;
 
-                Vector2 direction = GetMouseDirection();
+                Vector3 direction = BombReleasePoint.transform.position - transform.position;
                 ThrowBombServerRpc(direction, currentCharge * powerMultiplier, BombReleasePoint.transform.position);
                 isCharging = false;
         }
@@ -207,13 +209,26 @@ public class ThrowSystem : NetworkBehaviour
         BombReleasePoint.transform.position = transform.position + direction;
     }
 
+    void UpdateThrowPositionMobile()
+    {
+
+        Vector3 direction = rotationCircle.transform.position - rotationOuterCircle.transform.position;
+        if (direction.magnitude > throwPointDistance)
+        {
+            direction = direction.normalized * throwPointDistance;
+        }
+        BombReleasePoint.transform.position = transform.position + direction;
+    }
+
+
+
     [ServerRpc]
-    void ThrowBombServerRpc(Vector2 direction, float force, Vector3 throwPosition)
+    void ThrowBombServerRpc(Vector3 direction, float force, Vector3 throwPosition)
     {
         GameObject newbomb = Instantiate(bomb, throwPosition, Quaternion.identity);
         var netObj = newbomb.GetComponent<NetworkObject>();
         netObj.Spawn();
 
-        newbomb.GetComponent<Boom>().Initialize(direction, force);
+        newbomb.GetComponent<Boom>().Initialize(new Vector2(direction.x, direction.y), force);
     }
 }
