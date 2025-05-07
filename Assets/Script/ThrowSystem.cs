@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static UnityEngine.GraphicsBuffer;
 
 public class ThrowSystem : NetworkBehaviour
@@ -18,16 +19,11 @@ public class ThrowSystem : NetworkBehaviour
     private Vector3 object_pos;
     private float angle;
 
+
+
     //for mobile control
-    private bool touchStart = false;
-    private Vector2 pointA;
-    private Vector2 pointB;
-    private float middleOfScreen = Screen.width / 2;
-    public GameObject rotationCirclePrefab;
-    public GameObject rotationOuterCirclePrefab;
-    public GameObject rotationCircle;
-    public GameObject rotationOuterCircle;
-    public float maxFollowRadius;
+    public InputActionReference aim;
+    private Vector2 aimInput;
 
     [SerializeField] GameObject bomb;
     [SerializeField] GameObject arrow;
@@ -50,9 +46,6 @@ public class ThrowSystem : NetworkBehaviour
     {
         canvas = GameObject.Find("Canvas");
 
-        rotationCircle = Instantiate(rotationCirclePrefab, canvas.transform);
-        rotationOuterCircle = Instantiate(rotationOuterCirclePrefab, canvas.transform);
-
         defaultHandPostion = hand.transform.localPosition;
         hand = transform.Find("hand").gameObject;
         BombReleasePoint = hand.transform.Find("bombRelease").gameObject;
@@ -74,6 +67,8 @@ public class ThrowSystem : NetworkBehaviour
     {
         if (!IsOwner) return;
 
+        aimInput = aim.action.ReadValue<Vector2>();
+
         if (gameController.isPC)
         {
             UpdateHandPC();
@@ -81,7 +76,7 @@ public class ThrowSystem : NetworkBehaviour
         } else
         {
             UpdateHandMobile();
-            UpdateThrowPosition(rotationCircle.transform.position - rotationOuterCircle.transform.position);
+            UpdateThrowPosition(aimInput);
         }
         ChargeUp();
     }
@@ -104,51 +99,8 @@ public class ThrowSystem : NetworkBehaviour
     void UpdateHandMobile()
     {
         if (!IsOwner) return;
-
-        if (Input.GetMouseButtonDown(0) && Input.mousePosition.x > middleOfScreen)
-        {
-
-            pointA = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-
-            rotationCircle.transform.position = pointA;
-            rotationOuterCircle.transform.position = pointA;
-            rotationCircle.SetActive(true);
-            rotationOuterCircle.SetActive(true);
-
-        }
-        if (Input.GetMouseButton(0))
-        {
-            touchStart = true;
-            pointB = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        }
-        else
-        {
-            touchStart = false;
-        }
-
+        angle = Mathf.Atan2(aimInput.y, aimInput.x) * Mathf.Rad2Deg;
         UpdateHand();
-    }
-
-    private void FixedUpdate()
-    {
-        // for UpdateHandMobile();
-        if (touchStart && !gameController.isPC && IsOwner)
-        {
-            if (Input.mousePosition.x > middleOfScreen)
-            {
-                Vector2 offset = pointB - pointA;
-                Vector2 direction = Vector2.ClampMagnitude(offset, 1.0f);
-                angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-                rotationCircle.transform.position = new Vector2(pointA.x + offset.x, pointA.y + offset.y);
-            }
-        }
-        else
-        {
-            rotationCircle.SetActive(false);
-            rotationOuterCircle.SetActive(false);
-        }
-
     }
 
     private void UpdateHand()

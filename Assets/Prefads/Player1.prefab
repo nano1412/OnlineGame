@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -8775951296895834039}
   - component: {fileID: 2559539365029796519}
   - component: {fileID: -2666625556715836551}
+  - component: {fileID: 2893719117830634371}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -157,6 +158,8 @@ MonoBehaviour:
   isFlipped:
     m_InternalValue: 0
   playerControllerCanvasPrefab: {fileID: 8182433420007211335, guid: 98c8d685b3f17ed40878c3a6be87227f, type: 3}
+  move: {fileID: 2784550579246621693, guid: 4d89cee852e3ff8469b78933d47f1d73, type: 3}
+  movementInput: {x: 0, y: 0}
   rb: {fileID: -7419771189753286429}
   throwPointStartPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &3229095517184326822
@@ -176,6 +179,7 @@ MonoBehaviour:
   hand: {fileID: 9180340485198870919}
   BombReleasePoint: {fileID: 0}
   throwPointDistance: 1.5
+  aim: {fileID: -798786289721912891, guid: 4d89cee852e3ff8469b78933d47f1d73, type: 3}
   rotationCirclePrefab: {fileID: 3469596004618733625, guid: 2488354774ce5bf48863d42be1c7b7c9, type: 3}
   rotationOuterCirclePrefab: {fileID: 1975152728548841080, guid: 4a04503728864864eb11d6a63ca27bd9, type: 3}
   rotationCircle: {fileID: 0}
@@ -271,6 +275,36 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
+--- !u!114 &2893719117830634371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64465157015748119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 4d89cee852e3ff8469b78933d47f1d73, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: KB
+  m_DefaultActionMap: Move
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &2710868022225360489
 GameObject:
   m_ObjectHideFlags: 0

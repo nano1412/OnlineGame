@@ -4,6 +4,7 @@ using UnityEngine.XR;
 using UnityEngine.UI;
 using UnityEngine.Windows;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 //public class Playermovement : MonoBehaviour
 public class Playermovement : NetworkBehaviour
@@ -14,11 +15,10 @@ public class Playermovement : NetworkBehaviour
     public NetworkVariable<bool> isFlipped = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField] GameObject playerControllerCanvasPrefab;
     private GameObject playerControllerCanvas;
-    private ButtonHold leftbutton;
-    private ButtonHold rightbutton;
-    private ButtonHold downbutton;
-    private ButtonHold jumpbutton;
     //public LayerMask groundLayer;
+
+    public InputActionReference move;
+    private Vector2 movementInput;
 
     public Rigidbody2D rb;
     private SpriteRenderer bodySpriteRenderer;
@@ -29,11 +29,6 @@ public class Playermovement : NetworkBehaviour
     void Start()
     {
         playerControllerCanvas = Instantiate(playerControllerCanvasPrefab);
-        leftbutton = playerControllerCanvas.transform.Find("movementButton").Find("leftbutton").GetComponent<ButtonHold>();
-        rightbutton = playerControllerCanvas.transform.Find("movementButton").Find("rightButton").GetComponent<ButtonHold>();
-        downbutton = playerControllerCanvas.transform.Find("movementButton").Find("dropButton").GetComponent<ButtonHold>();
-        jumpbutton = playerControllerCanvas.transform.Find("movementButton").Find("jumpButton").GetComponent<ButtonHold>();
-
 
     throwPoint = transform.Find("hand").gameObject.transform.Find("bombRelease").gameObject;
         throwPointStartPosition = throwPoint.transform.position;
@@ -64,24 +59,31 @@ public class Playermovement : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        if (UnityEngine.Input.GetKey(KeyCode.A) || leftbutton.isHolding)
-        {
-            MoveLeft();
-        }
+        movementInput = move.action.ReadValue<Vector2>();
 
-        if (UnityEngine.Input.GetKey(KeyCode.S) || downbutton.isHolding)
-        {
-            Drop();
-        }
-
-        if (UnityEngine.Input.GetKey(KeyCode.D) || rightbutton.isHolding)
+        if(movementInput.x > 0.5f)
         {
             MoveRight();
         }
 
-        if ((UnityEngine.Input.GetKeyDown(KeyCode.W) || UnityEngine.Input.GetKeyDown(KeyCode.Space) || jumpbutton.isHolding )&& isGrounded)
+        if (movementInput.x < -0.5f)
+        {
+            MoveLeft();
+        }
+
+        if (movementInput.y < -0.5f)
+        {
+            Drop();
+        }
+
+        if (movementInput.y > 0.5f && isGrounded)
         {
             Jump();
+        }
+
+        if ((UnityEngine.Input.GetKeyDown(KeyCode.W) || UnityEngine.Input.GetKeyDown(KeyCode.Space))&& isGrounded)
+        {
+            
         }
             
     }
