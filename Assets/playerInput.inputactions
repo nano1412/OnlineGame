@@ -1,0 +1,46 @@
+{
+    "name": "playerInput",
+    "maps": [
+        {
+            "name": "move",
+            "id": "d3d04bc3-3047-47e8-b50f-c8d5ac0e209d",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "94cfa6d8-c52d-4e3d-b9f7-3fa2255ccd89",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1593ef8c-6a12-4166-8daf-b493d8994050",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "touchScreen",
+            "bindingGroup": "touchScreen",
+            "devices": [
+                {
+                    "devicePath": "<Touchscreen>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
