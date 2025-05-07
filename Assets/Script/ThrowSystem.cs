@@ -24,6 +24,7 @@ public class ThrowSystem : NetworkBehaviour
     //for mobile control
     public InputActionReference aim;
     private Vector2 aimInput;
+    Vector2 lastDirection = Vector2.up;
 
     [SerializeField] GameObject bomb;
     [SerializeField] GameObject arrow;
@@ -73,12 +74,13 @@ public class ThrowSystem : NetworkBehaviour
         {
             UpdateHandPC();
             UpdateThrowPosition(mouse_pos - transform.position);
+            ChargeUpPC();
         } else
         {
             UpdateHandMobile();
             UpdateThrowPosition(aimInput);
+            ChargeUpMobile();
         }
-        ChargeUp();
     }
 
     void UpdateHandPC()
@@ -117,7 +119,7 @@ public class ThrowSystem : NetworkBehaviour
         }
     }
 
-    void ChargeUp()
+    void ChargeUpPC()
     {
         cooldowncount -= Time.deltaTime;
 
@@ -140,6 +142,39 @@ public class ThrowSystem : NetworkBehaviour
                 Vector3 direction = BombReleasePoint.transform.position - transform.position;
                 ThrowBombServerRpc(direction, currentCharge * powerMultiplier, BombReleasePoint.transform.position);
                 isCharging = false;
+        }
+    }
+
+    void ChargeUpMobile()
+    {
+        cooldowncount -= Time.deltaTime;
+
+        
+
+        if(aimInput != Vector2.zero)
+        {
+            lastDirection = aimInput.normalized;
+        }
+
+        if (aimInput.magnitude > 0.5f && cooldowncount < 0)
+        {
+            isCharging = true;
+            currentCharge = minThrowForce;
+        }
+
+        if (aimInput.magnitude > 0.5f && isCharging)
+        {
+            currentCharge += chargeSpeed * Time.deltaTime;
+            currentCharge = Mathf.Clamp(currentCharge, minThrowForce, maxThrowForce);
+        }
+
+        if (aimInput == Vector2.zero && cooldowncount < 0 && isCharging)
+        {
+            cooldowncount = cooldown;
+
+            Vector3 direction = lastDirection;
+            ThrowBombServerRpc(direction, currentCharge * powerMultiplier, BombReleasePoint.transform.position);
+            isCharging = false;
         }
     }
 

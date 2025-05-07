@@ -159,7 +159,6 @@ MonoBehaviour:
     m_InternalValue: 0
   playerControllerCanvasPrefab: {fileID: 8182433420007211335, guid: 98c8d685b3f17ed40878c3a6be87227f, type: 3}
   move: {fileID: 2784550579246621693, guid: 4d89cee852e3ff8469b78933d47f1d73, type: 3}
-  movementInput: {x: 0, y: 0}
   rb: {fileID: -7419771189753286429}
   throwPointStartPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &3229095517184326822
@@ -180,14 +179,9 @@ MonoBehaviour:
   BombReleasePoint: {fileID: 0}
   throwPointDistance: 1.5
   aim: {fileID: -798786289721912891, guid: 4d89cee852e3ff8469b78933d47f1d73, type: 3}
-  rotationCirclePrefab: {fileID: 3469596004618733625, guid: 2488354774ce5bf48863d42be1c7b7c9, type: 3}
-  rotationOuterCirclePrefab: {fileID: 1975152728548841080, guid: 4a04503728864864eb11d6a63ca27bd9, type: 3}
-  rotationCircle: {fileID: 0}
-  rotationOuterCircle: {fileID: 0}
-  maxFollowRadius: 20
   bomb: {fileID: 5317098292680755031, guid: 5661f2f1ed0da064d915ca6e123fb6dd, type: 3}
   arrow: {fileID: 0}
-  powerMultiplier: 5
+  powerMultiplier: 2
   cooldown: 1
   cooldowncount: 0
   minThrowForce: 5

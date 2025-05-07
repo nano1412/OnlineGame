@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Netcode;
+using System.Collections;
 
 public class Boom : NetworkBehaviour
 {
@@ -19,6 +20,12 @@ public class Boom : NetworkBehaviour
     private bool applyForce;
 
     public GameObject boomPrefab;
+    private Collider2D col;
+
+    private void Awake()
+    {
+        col = GetComponent<Collider2D>();
+    }
 
     public void Initialize(Vector2 direction, float force)
     {
@@ -31,6 +38,7 @@ public class Boom : NetworkBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         Invoke(nameof(ExplodeServerRpc), countdown);
+        StartCoroutine(EnableColliderAfterDelay(armTime));
     }
 
     void FixedUpdate()
@@ -84,5 +92,12 @@ public class Boom : NetworkBehaviour
         {
             ExplodeServerRpc();
         }
+    }
+
+    private IEnumerator EnableColliderAfterDelay(float delay)
+    {
+        col.enabled = false;
+        yield return new WaitForSeconds(delay);
+        col.enabled = true;
     }
 }

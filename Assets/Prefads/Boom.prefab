@@ -127,7 +127,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5317098292680755031}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -204,11 +204,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  speed: 70
   damage: 10
   explosionRadius: 5
   countdown: 10
-  armTime: 2
+  lifeTime: 2
+  armTime: 0.5
   hitSound: {fileID: 0}
   boomPrefab: {fileID: 5317098292680755031}
 --- !u!114 &4084531569365459617
