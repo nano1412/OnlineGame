@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: f2f65f0dfddda854a930d8b14cac7b50
+guid: c81645306419d0547be87f82766e4a86
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1787376641466856317
-    second: vs_0
+      213: -683613234228954713
+    second: BG1_Door_0
   - first:
-      213: -5558134149879052615
-    second: vs_1
+      213: -4389105292904781382
+    second: BG1_Door_1
+  - first:
+      213: -8467285313825767082
+    second: BG1_Door_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 300
+  spritePixelsToUnits: 250
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -116,13 +119,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: vs_0
+      name: BG1_Door_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 121
-        height: 165
+        x: 1650
+        y: 542
+        width: 24
+        height: 45
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +134,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 38c898d1a66f137e0800000000000000
-      internalID: -1787376641466856317
+      spriteID: 7a9f60aa2615386f0800000000000000
+      internalID: -683613234228954713
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: vs_1
+      name: BG1_Door_1
       rect:
         serializedVersion: 2
-        x: 116
-        y: 0
-        width: 107
-        height: 166
+        x: 1656
+        y: 405
+        width: 532
+        height: 481
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +156,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9b6cd7e507a8dd2b0800000000000000
-      internalID: -5558134149879052615
+      spriteID: ab9af969df3c613c0800000000000000
+      internalID: -4389105292904781382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG1_Door_2
+      rect:
+        serializedVersion: 2
+        x: 1645
+        y: 487
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65188816ed82e7a80800000000000000
+      internalID: -8467285313825767082
       vertices: []
       indices: 
       edges: []
@@ -173,8 +198,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      vs_0: -1787376641466856317
-      vs_1: -5558134149879052615
+      BG1_Door_0: -683613234228954713
+      BG1_Door_1: -4389105292904781382
+      BG1_Door_2: -8467285313825767082
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

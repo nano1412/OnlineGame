@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 646d5f1a6027dbf4cb7404c298f8a7bd
+guid: c3ff286c4d4a2f3419f93e762b48625c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -621544255730958540
-    second: JOIN_0
-  - first:
-      213: 7318443613242443592
-    second: JOIN_1
-  - first:
-      213: -168348876395378931
-    second: JOIN_2
-  - first:
-      213: 8325307156968418803
-    second: JOIN_3
+      213: -2912429297015707901
+    second: BG1_Flag_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -60,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 300
+  spritePixelsToUnits: 250
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -122,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: JOIN_0
+      name: BG1_Flag_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 26
-        height: 73
+        x: 1910
+        y: 1608
+        width: 211
+        height: 318
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,74 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 43fb8f0eac4df57f0800000000000000
-      internalID: -621544255730958540
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JOIN_1
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 8
-        width: 46
-        height: 65
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 847ca0401b5509560800000000000000
-      internalID: 7318443613242443592
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JOIN_2
-      rect:
-        serializedVersion: 2
-        x: 90
-        y: 8
-        width: 19
-        height: 65
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d070e10c697e9adf0800000000000000
-      internalID: -168348876395378931
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: JOIN_3
-      rect:
-        serializedVersion: 2
-        x: 118
-        y: 8
-        width: 42
-        height: 65
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3fdae19ffbe698370800000000000000
-      internalID: 8325307156968418803
+      spriteID: 30720fd2cf8f497d0800000000000000
+      internalID: -2912429297015707901
       vertices: []
       indices: 
       edges: []
@@ -223,10 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      JOIN_0: -621544255730958540
-      JOIN_1: 7318443613242443592
-      JOIN_2: -168348876395378931
-      JOIN_3: 8325307156968418803
+      BG1_Flag_0: -2912429297015707901
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
