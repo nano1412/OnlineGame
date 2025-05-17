@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -3228552170289428127}
   - component: {fileID: -4289105250231420649}
   - component: {fileID: 7496388042052516599}
+  - component: {fileID: 2605558003974694306}
   - component: {fileID: -1068556207200591611}
   - component: {fileID: -8831971900457219678}
   - component: {fileID: 7375105935040643994}
@@ -192,6 +193,22 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!114 &2605558003974694306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8857851797400457322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aba4d8ebc59e6d24395a1d9f80b196ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  maxHP: 5
+  spriteRenderer: {fileID: 0}
+  gameController: {fileID: 0}
 --- !u!114 &-1068556207200591611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +224,12 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   moveSpeed: 5
   jumpForce: 7
-  isLeft: 0
+  isFlipped:
+    m_InternalValue: 0
+  playerControllerCanvasPrefab: {fileID: 0}
+  move: {fileID: 0}
+  rb: {fileID: 0}
+  throwPointStartPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &-8831971900457219678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,10 +243,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  networkManager: {fileID: 0}
+  gameController: {fileID: 0}
+  hand: {fileID: 0}
+  BombReleasePoint: {fileID: 0}
+  throwPointDistance: 0
+  aim: {fileID: 0}
   bomb: {fileID: 0}
   arrow: {fileID: 0}
-  hand: {fileID: 0}
+  powerMultiplier: 10
+  cooldown: 2
+  cooldowncount: 0
+  minThrowForce: 5
+  maxThrowForce: 20
+  chargeSpeed: 10
 --- !u!114 &7375105935040643994
 MonoBehaviour:
   m_ObjectHideFlags: 0
