@@ -1,17 +1,14 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class GameController : NetworkBehaviour
 {
     public bool isPC;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    [ServerRpc(RequireOwnership = false)]
+    public void PlayerLoseServerRpc(ulong loserClientId)
     {
-        
+        Debug.Log("Player " + loserClientId + " แพ้แล้ว!");
+        // เพิ่มระบบ Game Over ที่นี่
     }
 }

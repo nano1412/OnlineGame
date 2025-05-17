@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -7419771189753286429}
   - component: {fileID: 2878268565400894661}
   - component: {fileID: -6791141638073677929}
+  - component: {fileID: -7984793198509982009}
   - component: {fileID: -8511121676639027657}
   - component: {fileID: 3229095517184326822}
   - component: {fileID: -8775951296895834039}
@@ -140,6 +141,22 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!114 &-7984793198509982009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64465157015748119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aba4d8ebc59e6d24395a1d9f80b196ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  maxHP: 5
+  spriteRenderer: {fileID: 6587860763650392155}
+  gameController: {fileID: 0}
 --- !u!114 &-8511121676639027657
 MonoBehaviour:
   m_ObjectHideFlags: 0

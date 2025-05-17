@@ -5,9 +5,8 @@ using System.Collections;
 public class Boom : NetworkBehaviour
 {
     private Transform target;
-    public float damage = 10;
     public float explosionRadius = 5f;
-    public float countdown = 3f; // ���Դ��ѧ�ҡ 3 �Թҷ�
+    public float countdown = 3f;
     private bool hasExploded = false;
     [SerializeField] float lifeTime = 2;
     [SerializeField] float armTime = 2;
@@ -67,10 +66,10 @@ public class Boom : NetworkBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
         foreach (Collider2D collider in colliders)
         {
-            Playermovement player = collider.GetComponent<Playermovement>();
-            if (player != null)
+            HealthSystem health = collider.GetComponent<HealthSystem>();
+            if (health != null)
             {
-                player.TakeDamageServerRpc(damage);
+                health.TakeDamage(1); // ลด HP ทีละ 1
             }
         }
 
@@ -81,13 +80,11 @@ public class Boom : NetworkBehaviour
     [ClientRpc(RequireOwnership = false)]
     void ExplodeClientRpc()
     {
-        // �����Ϳ࿡�����Դ���ء���͹����繾�����ѹ
         Debug.Log("Boom exploded!");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
         if ((collision.gameObject.CompareTag("Player") || lifeTime < 0) && armTime < 0)
         {
             ExplodeServerRpc();
@@ -99,5 +96,19 @@ public class Boom : NetworkBehaviour
         col.enabled = false;
         yield return new WaitForSeconds(delay);
         col.enabled = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            HealthSystem health = collision.GetComponent<HealthSystem>();
+            if (health != null)
+            {
+                health.TakeDamage(1); // ลด HP ทีละ 1
+            }
+
+            Destroy(gameObject); // หรือใช้ Despawn ถ้าใช้ NetworkObject
+        }
     }
 }
