@@ -1,54 +1,44 @@
 using UnityEngine;
 using Unity.Netcode;
-using System;
 using System.Collections;
+using TMPro;
 
 public class HealthSystem : NetworkBehaviour
 {
     [SerializeField] private int maxHP = 5;
-    private int currentHP;
+
+    // ใช้ NetworkVariable เพื่อให้ทุกคนเห็นค่า HP ของผู้เล่นนี้
+    public NetworkVariable<int> currentHP = new NetworkVariable<int>();
 
     private SpriteRenderer sr;
     private bool isFlashing = false;
 
-    // Event สำหรับอัปเดต UI HP
-    public event Action<int, int> OnHealthChanged; // currentHP, maxHP
+    public static event System.Action<ulong> OnPlayerDeath;
 
-    // Property ให้ UI หรือระบบอื่นเข้าถึงค่าปัจจุบันได้
-    public int CurrentHP => currentHP;
-    public int MaxHP => maxHP;
-
-    // Event แจ้งเมื่อ HP หมด
-    public static event Action<ulong> OnPlayerDeath;
-
-    void Start()
+    public override void OnNetworkSpawn()
     {
-        currentHP = maxHP;
-        sr = GetComponent<SpriteRenderer>();
+        base.OnNetworkSpawn();
+        if (IsServer)
+        {
+            currentHP.Value = maxHP;
+        }
 
-        // เรียก event ตอนเริ่มเพื่อให้ UI แสดง HP ทันที
-        OnHealthChanged?.Invoke(currentHP, maxHP);
+        sr = GetComponent<SpriteRenderer>();
     }
 
-    // ฟังก์ชันเรียกเมื่อโดนระเบิด
     public void TakeDamage(int amount)
     {
-        if (!IsOwner) return; // ให้เจ้าของเท่านั้นจัดการ HP ตัวเอง
+        if (!IsOwner) return;
 
-        currentHP -= amount;
-        Debug.Log("Player " + OwnerClientId + " โดนระเบิด! เหลือ HP = " + currentHP);
-
-        // แจ้ง UI เปลี่ยน HP
-        OnHealthChanged?.Invoke(currentHP, maxHP);
+        currentHP.Value -= amount;
+        Debug.Log($"Player {OwnerClientId} โดนระเบิด! เหลือ HP = {currentHP.Value}");
 
         if (!isFlashing)
             StartCoroutine(FlashRed());
 
-        if (currentHP <= 0)
+        if (currentHP.Value <= 0)
         {
-            Debug.Log("Player " + OwnerClientId + " แพ้แล้ว!");
-
-            // แจ้งว่า Player ตาย (เฉพาะ Server)
+            Debug.Log($"Player {OwnerClientId} แพ้แล้ว!");
             if (IsServer)
             {
                 OnPlayerDeath?.Invoke(OwnerClientId);
@@ -56,7 +46,6 @@ public class HealthSystem : NetworkBehaviour
         }
     }
 
-    // เอฟเฟกต์ตัวแดงเมื่อโดนโจมตี
     IEnumerator FlashRed()
     {
         isFlashing = true;

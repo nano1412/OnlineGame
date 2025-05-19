@@ -1036,9 +1036,9 @@ GameObject:
   m_Component:
   - component: {fileID: 742929727}
   - component: {fileID: 742929725}
-  - component: {fileID: 742929726}
+  - component: {fileID: 742929728}
   m_Layer: 0
-  m_Name: GameController
+  m_Name: HPUIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1069,20 +1069,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &742929726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 742929724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 895079ce6d14b764c9084f966d30b9a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  isPC: 0
 --- !u!4 &742929727
 Transform:
   m_ObjectHideFlags: 0
@@ -1098,6 +1084,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &742929728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742929724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fc81de286513bd42b8ffbbc65a245fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1HPText: {fileID: 1594504669}
+  player2HPText: {fileID: 1473206453}
 --- !u!1 &760004165
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,7 +1574,7 @@ GameObject:
   - component: {fileID: 1473206454}
   - component: {fileID: 1473206453}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Player2HPText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1619,7 +1619,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HP = 5
+  m_text: 5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
@@ -1957,7 +1957,7 @@ GameObject:
   - component: {fileID: 1594504670}
   - component: {fileID: 1594504669}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Player1HPText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2002,7 +2002,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HP = 5
+  m_text: 5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
