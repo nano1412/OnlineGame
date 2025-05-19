@@ -1,14 +1,34 @@
 using Unity.Netcode;
 using UnityEngine;
 
-public class GameController : NetworkBehaviour
+public class GameController : MonoBehaviour
 {
     public bool isPC;
 
-    [ServerRpc(RequireOwnership = false)]
-    public void PlayerLoseServerRpc(ulong loserClientId)
+    private void OnEnable()
     {
-        Debug.Log("Player " + loserClientId + " แพ้แล้ว!");
-        // เพิ่มระบบ Game Over ที่นี่
+        HealthSystem.OnPlayerDeath += HandlePlayerDeath;
+    }
+
+    private void OnDisable()
+    {
+        HealthSystem.OnPlayerDeath -= HandlePlayerDeath;
+    }
+
+    private void HandlePlayerDeath(ulong clientId)
+    {
+        // เรียก ServerRpc เพื่อจัดการกรณีผู้เล่นแพ้
+        if (NetworkManager.Singleton.IsServer)
+        {
+            PlayerLoseServerRpc(clientId);
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void PlayerLoseServerRpc(ulong losingClientId)
+    {
+        Debug.Log("Player " + losingClientId + " แพ้แล้ว!");
+
+        // TODO: ใส่โค้ดจัดการเมื่อแพ้ เช่น แสดง UI แพ้, รีสตาร์ท, เปลี่ยนฉาก ฯลฯ
     }
 }

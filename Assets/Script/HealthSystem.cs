@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Netcode;
+using System;
 using System.Collections;
 
 public class HealthSystem : NetworkBehaviour
@@ -10,8 +11,8 @@ public class HealthSystem : NetworkBehaviour
     private SpriteRenderer sr;
     private bool isFlashing = false;
 
-    [Header("Reference")]
-    public GameController gameController;
+    // Event แจ้งเมื่อผู้เล่นตาย
+    public static event Action<ulong> OnPlayerDeath;
 
     void Start()
     {
@@ -22,7 +23,7 @@ public class HealthSystem : NetworkBehaviour
     // ฟังก์ชันเรียกเมื่อโดนระเบิด
     public void TakeDamage(int amount)
     {
-        if (!IsOwner) return; // ให้เจ้าของเท่านั้นที่จัดการ HP ตัวเอง
+        if (!IsOwner) return; // ให้เจ้าของตัวละครจัดการ HP ของตัวเองเท่านั้น
 
         currentHP -= amount;
         Debug.Log("Player " + OwnerClientId + " โดนระเบิด! เหลือ HP = " + currentHP);
@@ -34,10 +35,10 @@ public class HealthSystem : NetworkBehaviour
         {
             Debug.Log("Player " + OwnerClientId + " แพ้แล้ว!");
 
-            // เรียก Server ให้บอกว่าแพ้
-            if (gameController != null && IsServer)
+            // แจ้งเหตุการณ์แพ้ไปยังระบบอื่น (Server เท่านั้นที่แจ้ง)
+            if (IsServer)
             {
-                gameController.PlayerLoseServerRpc(OwnerClientId);
+                OnPlayerDeath?.Invoke(OwnerClientId);
             }
         }
     }
