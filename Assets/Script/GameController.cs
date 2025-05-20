@@ -1,10 +1,20 @@
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameController : NetworkBehaviour
 {
+    public static GameController Instance { get; private set; }
     public bool isPC;
 
+   
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
     private void OnEnable()
     {
         HealthSystem.OnPlayerDeath += HandlePlayerDeath;
