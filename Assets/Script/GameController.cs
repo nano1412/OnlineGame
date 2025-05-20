@@ -1,17 +1,34 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class GameController : NetworkBehaviour
 {
     public bool isPC;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    private void OnEnable()
     {
-        
+        HealthSystem.OnPlayerDeath += HandlePlayerDeath;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        HealthSystem.OnPlayerDeath -= HandlePlayerDeath;
+    }
+
+    private void HandlePlayerDeath(ulong clientId)
+    {
+        // เรียก ServerRpc เพื่อจัดการกรณีผู้เล่นแพ้
+        if (NetworkManager.Singleton.IsServer)
+        {
+            PlayerLoseServerRpc(clientId);
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void PlayerLoseServerRpc(ulong losingClientId)
+    {
+        Debug.Log("Player " + losingClientId + " แพ้แล้ว!");
+
+        // TODO: ใส่โค้ดจัดการเมื่อแพ้ เช่น แสดง UI แพ้, รีสตาร์ท, เปลี่ยนฉาก ฯลฯ
     }
 }
