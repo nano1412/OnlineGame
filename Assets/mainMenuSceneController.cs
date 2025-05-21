@@ -88,7 +88,7 @@ public class mainMenuSceneController : MonoBehaviour
         }
         playerCount = NetworkManager.Singleton.ConnectedClients.Count;
         Debug.Log(playerCount);
-        if(playerCount == 2)
+        if(playerCount == 2 && SceneManager.GetActiveScene().name != "SampleScene")
         {
             NetworkManager.Singleton.SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
         }

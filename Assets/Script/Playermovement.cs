@@ -13,8 +13,7 @@ public class Playermovement : NetworkBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
     public NetworkVariable<bool> isFlipped = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    [SerializeField] GameObject playerControllerCanvasPrefab;
-    private GameObject playerControllerCanvas;
+    [SerializeField] private GameObject playerControllerCanvas;
     //public LayerMask groundLayer;
 
     public InputActionReference move;
@@ -28,9 +27,11 @@ public class Playermovement : NetworkBehaviour
 
     void Start()
     {
-        playerControllerCanvas = Instantiate(playerControllerCanvasPrefab);
+        playerControllerCanvas = GameObject.FindWithTag("OnScreenController");
 
-    throwPoint = transform.Find("hand").gameObject.transform.Find("bombRelease").gameObject;
+
+
+        throwPoint = transform.Find("hand").gameObject.transform.Find("bombRelease").gameObject;
         throwPointStartPosition = throwPoint.transform.position;
         rb = GetComponent<Rigidbody2D>();
         bodySpriteRenderer = transform.Find("body").GetComponent<SpriteRenderer>();

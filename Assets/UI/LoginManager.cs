@@ -4,7 +4,7 @@ using UnityEngine;
 using Unity.Netcode;
 using TMPro;
 
-public class LoginManager : MonoBehaviour
+public class LoginManager : NetworkBehaviour
 {
     //public TMP_InputField userNameInputField;
     //public TMP_InputField characterIdInputField;
@@ -21,21 +21,25 @@ public class LoginManager : MonoBehaviour
 
     private void Start()
     {
-
+        Debug.Log($"playerCount {NetworkManager.Singleton.ConnectedClientsIds.Count}");
+        if (!NetworkManager.Singleton.IsHost) return;
         NetworkManager.Singleton.OnServerStarted += HandleServerStarted;
         NetworkManager.Singleton.OnClientConnectedCallback += HandleClientConnected;
         NetworkManager.Singleton.OnClientDisconnectCallback += HandleClientDisconnect;
         SetUIVisible(false);
 
+        
+        Debug.Log("Im host");
         int index = 0;
         foreach (var clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
+            Debug.Log($"{clientId}");
             if(index == 0)
             {
-                SpawnPlayerServerRpc(spawnPosition1.position);
+                SpawnPlayerServerRpc(spawnPosition1.position, clientId);
             } else
             {
-                SpawnPlayerServerRpc(spawnPosition2.position);
+                SpawnPlayerServerRpc(spawnPosition2.position, clientId);
             }
             index++;
         }
@@ -150,14 +154,13 @@ public class LoginManager : MonoBehaviour
     }
 
     [ServerRpc]
-    void SpawnPlayerServerRpc(Vector3 spawnPosition, ServerRpcParams rpcParams = default)
+    void SpawnPlayerServerRpc(Vector3 spawnPosition, ulong clientId, ServerRpcParams rpcParams = default)
     {
-        ulong clientId = rpcParams.Receive.SenderClientId;
-        int clientIndex = GetClientIndex(clientId);
 
         GameObject newPlayer = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
         var netObj = newPlayer.GetComponent<NetworkObject>();
         netObj.Spawn();
+        netObj.ChangeOwnership(clientId);
 
     }
 
