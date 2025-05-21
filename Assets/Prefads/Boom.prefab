@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  explosionRadius: 3
+  explosionRadius: 1
   countdown: 5
   lifeTime: 2
   armTime: 0.25
