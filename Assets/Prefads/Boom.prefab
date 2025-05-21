@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2299253413055369049}
   - component: {fileID: 3313003314051329849}
   - component: {fileID: -796302096293194749}
-  - component: {fileID: 8850415423270949331}
+  - component: {fileID: 1054887059776938478}
   - component: {fileID: 4084531569365459617}
   - component: {fileID: 5003550212348759038}
   m_Layer: 0
@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -191,7 +191,7 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &8850415423270949331
+--- !u!114 &1054887059776938478
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,11 +204,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  damage: 10
-  explosionRadius: 5
-  countdown: 10
+  explosionRadius: 1
+  countdown: 5
   lifeTime: 2
-  armTime: 0.5
+  armTime: 0.25
   hitSound: {fileID: 0}
   boomPrefab: {fileID: 5317098292680755031}
 --- !u!114 &4084531569365459617
@@ -225,6 +224,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkTransformExpanded: 0
+  AutoOwnerAuthorityTickOffset: 1
+  PositionInterpolationType: 0
+  RotationInterpolationType: 0
+  ScaleInterpolationType: 0
+  PositionLerpSmoothing: 1
+  PositionMaxInterpolationTime: 0.1
+  RotationLerpSmoothing: 1
+  RotationMaxInterpolationTime: 0.1
+  ScaleLerpSmoothing: 1
+  ScaleMaxInterpolationTime: 0.1
   AuthorityMode: 0
   TickSyncChildren: 0
   UseUnreliableDeltas: 0

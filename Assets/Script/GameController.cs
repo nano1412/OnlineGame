@@ -62,6 +62,14 @@ public class GameController : NetworkBehaviour
         // หยุดเกมหรือปิด UI อื่น ๆ เพิ่มเติมได้ที่นี่
     }
 
+    public void ForceGameOver(ulong clientId)
+    {
+        if (IsServer)
+        {
+            PlayerLoseClientRpc(clientId);
+        }
+    }
+
     void ReturnToMenu()
     {
         Destroy(mainMenuSceneController.current);
