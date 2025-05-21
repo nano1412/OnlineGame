@@ -16,6 +16,6 @@ public class closeMenu : MonoBehaviour
 
     public void SetActiveMyParentOff()
     {
-        transform.parent.gameObject.SetActive(false);
+        transform.parent.parent.gameObject.SetActive(false);
     }
 }

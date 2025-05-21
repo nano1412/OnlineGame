@@ -461,11 +461,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6619074106934677563, guid: 19aedb54e835a744488dcf7f78fb975d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2295375
+      value: 2.0494015
       objectReference: {fileID: 0}
     - target: {fileID: 6619074106934677563, guid: 19aedb54e835a744488dcf7f78fb975d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.1688696
+      value: 2.5532188
       objectReference: {fileID: 0}
     - target: {fileID: 6619074106934677563, guid: 19aedb54e835a744488dcf7f78fb975d, type: 3}
       propertyPath: m_LocalScale.z
@@ -473,11 +473,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6619074106934677563, guid: 19aedb54e835a744488dcf7f78fb975d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.9656
+      value: 0.9233
       objectReference: {fileID: 0}
     - target: {fileID: 6619074106934677563, guid: 19aedb54e835a744488dcf7f78fb975d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.15
+      value: -0.0657
       objectReference: {fileID: 0}
     - target: {fileID: 6619074106934677563, guid: 19aedb54e835a744488dcf7f78fb975d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -965,6 +965,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 381345439341475259, guid: 473cbee2d53c9224fa846ccd91a8a065, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4982515376895444648, guid: 473cbee2d53c9224fa846ccd91a8a065, type: 3}
       propertyPath: m_Name
       value: Dead area
@@ -1007,6 +1011,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5846316517275070095, guid: 473cbee2d53c9224fa846ccd91a8a065, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7855681148045143808, guid: 473cbee2d53c9224fa846ccd91a8a065, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8452131225410559436, guid: 473cbee2d53c9224fa846ccd91a8a065, type: 3}
+      propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

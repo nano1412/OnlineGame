@@ -123,6 +123,8 @@ public class mainMenuSceneController : MonoBehaviour
     }
     public async void StartSessionAsHost()
     {
+        hostCode.text = "Generating Code...";
+
         var playerProperties = await GetPlayerProperties();
 
         var options = new SessionOptions
