@@ -193,12 +193,8 @@ public class LoginManager : NetworkBehaviour
     {
         int index = GetClientIndex(clientId);
         if (index == 0)
-        {
             return spawnPosition1.position;
-        }
         else
-        {
             return spawnPosition2.position;
-        }
     }
 }
