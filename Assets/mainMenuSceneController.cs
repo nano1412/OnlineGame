@@ -88,12 +88,19 @@ public class mainMenuSceneController : MonoBehaviour
         }
         playerCount = NetworkManager.Singleton.ConnectedClients.Count;
         Debug.Log(playerCount);
-        if(playerCount == 2 && SceneManager.GetActiveScene().name != "map1")
+        if (playerCount == 2 && !IsInGameMap() && NetworkManager.Singleton.IsServer)
         {
-            NetworkManager.Singleton.SceneManager.LoadScene("map1", LoadSceneMode.Single);
+            string[] availableMaps = { "map1", "map2" };
+            string selectedMap = availableMaps[UnityEngine.Random.Range(0, availableMaps.Length)];
+            Debug.Log($"[Host] Loading random map: {selectedMap}");
+            NetworkManager.Singleton.SceneManager.LoadScene(selectedMap, LoadSceneMode.Single);
         }
     }
-
+    bool IsInGameMap()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;
+        return currentScene == "map1" || currentScene == "map2";
+    }
     public void JoinGame()
     {
         //enable join canvas

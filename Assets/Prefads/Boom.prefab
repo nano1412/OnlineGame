@@ -207,7 +207,7 @@ MonoBehaviour:
   explosionRadius: 3
   countdown: 5
   lifeTime: 2
-  armTime: 0.15
+  armTime: 0.25
   hitSound: {fileID: 0}
   boomPrefab: {fileID: 5317098292680755031}
 --- !u!114 &4084531569365459617
