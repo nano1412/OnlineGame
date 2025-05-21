@@ -88,17 +88,10 @@ public class mainMenuSceneController : MonoBehaviour
         }
         playerCount = NetworkManager.Singleton.ConnectedClients.Count;
         Debug.Log(playerCount);
-        if(playerCount == 2 && SceneManager.GetActiveScene().name != "SampleScene")
+        if(playerCount == 2 && SceneManager.GetActiveScene().name != "map1")
         {
-            NetworkManager.Singleton.SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+            NetworkManager.Singleton.SceneManager.LoadScene("map1", LoadSceneMode.Single);
         }
-    }
-
-    public async Task ReturnToMainMenuAsync(ulong clientId)
-    {
-        await Task.Delay(2000);
-        NetworkManager.Singleton.SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
-        await LeaveSession();
     }
 
     public void JoinGame()
