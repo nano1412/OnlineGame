@@ -14,20 +14,38 @@ public class LoginManager : MonoBehaviour
     public GameObject hostButton;
     public GameObject clientButton;
     public GameObject scorePanel;
+    public GameObject playerPrefab;
+
+    public Transform spawnPosition1;
+    public Transform spawnPosition2;
 
     private void Start()
     {
+
         NetworkManager.Singleton.OnServerStarted += HandleServerStarted;
         NetworkManager.Singleton.OnClientConnectedCallback += HandleClientConnected;
         NetworkManager.Singleton.OnClientDisconnectCallback += HandleClientDisconnect;
         SetUIVisible(false);
+
+        int index = 0;
+        foreach (var clientId in NetworkManager.Singleton.ConnectedClientsIds)
+        {
+            if(index == 0)
+            {
+                SpawnPlayerServerRpc(spawnPosition1.position);
+            } else
+            {
+                SpawnPlayerServerRpc(spawnPosition2.position);
+            }
+            index++;
+        }
     }
 
     public void SetUIVisible(bool isUserLogin)
     {
-        loginPanel.SetActive(!isUserLogin);
+        /*loginPanel.SetActive(!isUserLogin);
         leaveButton.SetActive(isUserLogin);
-        scorePanel.SetActive(isUserLogin);
+        scorePanel.SetActive(isUserLogin);*/
     }
 
     private void HandleClientDisconnect(ulong clientId)
@@ -119,4 +137,38 @@ public class LoginManager : MonoBehaviour
         response.Rotation = Quaternion.identity;
     }*/
 
+    public List<ulong> GetAllPlayerClientIds()
+    {
+        List<ulong> clientIds = new List<ulong>();
+
+        foreach (var client in NetworkManager.Singleton.ConnectedClients)
+        {
+            clientIds.Add(client.Key); // Key is the ClientId
+        }
+
+        return clientIds;
+    }
+
+    [ServerRpc]
+    void SpawnPlayerServerRpc(Vector3 spawnPosition, ServerRpcParams rpcParams = default)
+    {
+        ulong clientId = rpcParams.Receive.SenderClientId;
+        int clientIndex = GetClientIndex(clientId);
+
+        GameObject newPlayer = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
+        var netObj = newPlayer.GetComponent<NetworkObject>();
+        netObj.Spawn();
+
+    }
+
+    private int GetClientIndex(ulong clientId)
+    {
+        var ids = NetworkManager.Singleton.ConnectedClientsIds;
+        for (int i = 0; i < ids.Count; i++)
+        {
+            if (ids[i] == clientId)
+                return i;
+        }
+        return 0;
+    }
 }

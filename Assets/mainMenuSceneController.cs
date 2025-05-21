@@ -27,7 +27,6 @@ public class mainMenuSceneController : MonoBehaviour
     public TMP_InputField codeInput;
     public Button joinButton;
     public Button hostButton;
-    public GameObject NetworkManeger;
 
     ISession activeSession;
     ISession ActiveSession
@@ -49,7 +48,6 @@ public class mainMenuSceneController : MonoBehaviour
         {
             current = this;
             DontDestroyOnLoad(gameObject);
-            DontDestroyOnLoad(NetworkManeger);
         }
         else
         {
@@ -156,4 +154,5 @@ public class mainMenuSceneController : MonoBehaviour
             }
         }
     }
+
 }
