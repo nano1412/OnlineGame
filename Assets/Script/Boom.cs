@@ -98,7 +98,7 @@ public class Boom : NetworkBehaviour
         col.enabled = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
@@ -110,5 +110,5 @@ public class Boom : NetworkBehaviour
 
             Destroy(gameObject); // หรือใช้ Despawn ถ้าใช้ NetworkObject
         }
-    }
+    }*/
 }

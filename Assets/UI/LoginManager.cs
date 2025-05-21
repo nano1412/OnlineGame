@@ -39,7 +39,7 @@ public class LoginManager : NetworkBehaviour
                 SpawnPlayerServerRpc(spawnPosition1.position, clientId);
             } else
             {
-                SpawnPlayerServerRpc(spawnPosition2.position, clientId);
+                SpawnPlayerServerRpc(spawnPosition2.position,clientId);
             }
             index++;
         }

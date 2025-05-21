@@ -28,7 +28,7 @@ public class HealthSystem : NetworkBehaviour
 
     public void TakeDamage(int amount)
     {
-        if (!IsOwner) return;
+       // if (!IsOwner) return;
 
         currentHP.Value -= amount;
         Debug.Log($"Player {OwnerClientId} โดนระเบิด! เหลือ HP = {currentHP.Value}");

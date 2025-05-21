@@ -94,6 +94,13 @@ public class mainMenuSceneController : MonoBehaviour
         }
     }
 
+    public async Task ReturnToMainMenuAsync(ulong clientId)
+    {
+        await Task.Delay(2000);
+        NetworkManager.Singleton.SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
+        await LeaveSession();
+    }
+
     public void JoinGame()
     {
         //enable join canvas

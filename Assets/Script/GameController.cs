@@ -1,13 +1,17 @@
+Ôªøusing TMPro;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : NetworkBehaviour
 {
     public static GameController Instance { get; private set; }
     public bool isPC;
+    public GameObject gameOverPanel;
+    public GameObject gameOverPanellose;
+    public GameObject gameOverPanelWin;
 
-   
     private void Awake()
     {
         if (Instance == null)
@@ -15,6 +19,13 @@ public class GameController : NetworkBehaviour
             Instance = this;
         }
     }
+
+    private void Start()
+    {
+        gameOverPanellose.SetActive(false);
+        gameOverPanelWin.SetActive(false);
+    }
+
     private void OnEnable()
     {
         HealthSystem.OnPlayerDeath += HandlePlayerDeath;
@@ -27,18 +38,34 @@ public class GameController : NetworkBehaviour
 
     private void HandlePlayerDeath(ulong clientId)
     {
-        // ‡√’¬° ServerRpc ‡æ◊ËÕ®—¥°“√°√≥’ºŸÈ‡≈Ëπ·æÈ
-        if (NetworkManager.Singleton.IsServer)
+        if (IsServer)
         {
-            PlayerLoseServerRpc(clientId);
+            PlayerLoseClientRpc(clientId);
         }
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void PlayerLoseServerRpc(ulong losingClientId)
+    [ClientRpc]
+    private void PlayerLoseClientRpc(ulong losingClientId)
     {
-        Debug.Log("Player " + losingClientId + " ·æÈ·≈È«!");
+        gameOverPanel.SetActive(true);
 
-        // TODO: „ Ë‚§È¥®—¥°“√‡¡◊ËÕ·æÈ ‡™Ëπ · ¥ß UI ·æÈ, √’ µ“√Ï∑, ‡ª≈’Ë¬π©“° œ≈œ
+        if (NetworkManager.Singleton.LocalClientId == losingClientId)
+        {
+            gameOverPanellose.SetActive(true);
+        }
+        else
+        {
+            gameOverPanelWin.SetActive(true);
+        }
+        Invoke("ReturnToMenu", 2f);
+
+        // ‡∏´‡∏¢‡∏∏‡∏î‡πÄ‡∏Å‡∏°‡∏´‡∏£‡∏∑‡∏≠‡∏õ‡∏¥‡∏î UI ‡∏≠‡∏∑‡πà‡∏ô ‡πÜ ‡πÄ‡∏û‡∏¥‡πà‡∏°‡πÄ‡∏ï‡∏¥‡∏°‡πÑ‡∏î‡πâ‡∏ó‡∏µ‡πà‡∏ô‡∏µ‡πà
+    }
+
+    void ReturnToMenu()
+    {
+        Destroy(mainMenuSceneController.current);
+        SceneManager.LoadScene("Main_Menu");
+        mainMenuSceneController.current.LeaveSession();
     }
 }

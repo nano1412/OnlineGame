@@ -28,8 +28,8 @@ public class HPUIManager : MonoBehaviour
             var p1 = playerHealths[0];
             var p2 = playerHealths[1];
 
-            player1HPText.text = $"Player 1 HP: {p1.currentHP.Value}";
-            player2HPText.text = $"Player 2 HP: {p2.currentHP.Value}";
+            player1HPText.text = $"HP: {p1.currentHP.Value}";
+            player2HPText.text = $"HP: {p2.currentHP.Value}";
         }
     }
 }
