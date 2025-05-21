@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Netcode;
 
 public class KillBox : MonoBehaviour
 {
@@ -6,16 +7,11 @@ public class KillBox : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            var health = other.GetComponent<HealthSystem>();
-            if (health != null)
+            var networkObject = other.GetComponent<NetworkObject>();
+            if (networkObject != null && NetworkManager.Singleton.IsServer)
             {
-                health.TakeDamage(1);
-            }
-
-            var respawn = other.GetComponent<PlayerRespawn>();
-            if (respawn != null)
-            {
-                respawn.RequestRespawn();
+                // เรียก Game Over ทันที โดยส่ง clientId ไปให้ GameController
+                GameController.Instance.ForceGameOver(networkObject.OwnerClientId);
             }
         }
     }

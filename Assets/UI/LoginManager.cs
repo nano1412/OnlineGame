@@ -19,7 +19,7 @@ public class LoginManager : NetworkBehaviour
     public Transform spawnPosition1;
     public Transform spawnPosition2;
 
-    public static LoginManager Instance { get; private set; }
+    /*public static LoginManager Instance { get; private set; }
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class LoginManager : NetworkBehaviour
         {
             Instance = this;
         }
-    }
+    }*/
 
     private void Start()
     {
@@ -189,12 +189,12 @@ public class LoginManager : NetworkBehaviour
         return 0;
     }
 
-    public Vector3 GetSpawnPositionForClient(ulong clientId)
+    /*public Vector3 GetSpawnPositionForClient(ulong clientId)
     {
         int index = GetClientIndex(clientId);
         if (index == 0)
             return spawnPosition1.position;
         else
             return spawnPosition2.position;
-    }
+    }*/
 }
