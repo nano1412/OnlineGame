@@ -54,6 +54,7 @@ public class ThrowSystem : NetworkBehaviour
         handSpriteRenderer = hand.transform.GetComponent<SpriteRenderer>();
 
         playermovement.isFlipped.OnValueChanged += HandleFlipChange;
+        
 
     }
 
@@ -196,4 +197,5 @@ public class ThrowSystem : NetworkBehaviour
 
         newbomb.GetComponent<Boom>().Initialize(new Vector2(direction.x, direction.y), force);
     }
+
 }
