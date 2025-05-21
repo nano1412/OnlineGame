@@ -19,6 +19,20 @@ public class LoginManager : NetworkBehaviour
     public Transform spawnPosition1;
     public Transform spawnPosition2;
 
+    public static LoginManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     private void Start()
     {
         Debug.Log($"playerCount {NetworkManager.Singleton.ConnectedClientsIds.Count}");
@@ -173,5 +187,18 @@ public class LoginManager : NetworkBehaviour
                 return i;
         }
         return 0;
+    }
+
+    public Vector3 GetSpawnPositionForClient(ulong clientId)
+    {
+        int index = GetClientIndex(clientId);
+        if (index == 0)
+        {
+            return spawnPosition1.position;
+        }
+        else
+        {
+            return spawnPosition2.position;
+        }
     }
 }
