@@ -204,10 +204,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  explosionRadius: 5
+  explosionRadius: 3
   countdown: 10
   lifeTime: 2
-  armTime: 0.5
+  armTime: 0.1
   hitSound: {fileID: 0}
   boomPrefab: {fileID: 5317098292680755031}
 --- !u!114 &4084531569365459617

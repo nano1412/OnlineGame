@@ -763,81 +763,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!1 &1932563924
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1932563927}
-  - component: {fileID: 1932563925}
-  - component: {fileID: 1932563926}
-  m_Layer: 0
-  m_Name: Gamecontrol
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1932563925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932563924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2322975964
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 0
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
---- !u!114 &1932563926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932563924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 895079ce6d14b764c9084f966d30b9a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  isPC: 0
-  gameOverPanel: {fileID: 2052708970}
-  gameOverPanellose: {fileID: 2052708969}
-  gameOverPanelWin: {fileID: 2052708968}
---- !u!4 &1932563927
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932563924}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 551.19446, y: 269.25, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2041820870
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,8 +940,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fc81de286513bd42b8ffbbc65a245fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1HPText: {fileID: 2052708965}
-  player2HPText: {fileID: 2052708964}
+  player1HPText: {fileID: 2052708964}
+  player2HPText: {fileID: 2052708965}
 --- !u!1 &2052708968 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5029776138951607370, guid: b519b7de1fda8c243a538977bb49399c, type: 3}
@@ -1096,7 +1021,6 @@ SceneRoots:
   - {fileID: 274092143}
   - {fileID: 1285014138}
   - {fileID: 1405637661}
-  - {fileID: 1932563927}
   - {fileID: 685005252}
   - {fileID: 2052708963}
   - {fileID: 914805475}
